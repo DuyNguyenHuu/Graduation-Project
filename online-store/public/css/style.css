@@ -1,0 +1,438 @@
+.login{
+    border: 1px solid black;
+    border-radius: 10px;
+    width:30em;
+    height: 15em;
+}
+.account{
+    margin: 0.5em 0 0.5em 2em;
+    width:25em;
+}
+.login button{
+    margin:0.5em 0 0 12em;
+}
+.login h3{
+    margin:0.5em 0 0 6em;
+}
+
+
+.register{
+    border: 1px solid black;
+    border-radius: 10px;
+    width:30em;
+    height: 20em;
+    padding-left: 2em;
+}
+.register button{
+    margin:0.5em 0 0 11em;
+}
+.register h3{
+    margin:0.5em 0 0 6em;
+}
+.forgotpassword{
+    border: 1px solid black;
+    border-radius: 10px;
+    width:30em;
+    height: 20em;
+    padding-left: 2em;
+}
+.forgotpassword h3{
+    margin:0.5em 0 0.5em 4em;
+}
+.forgotpassword input{
+    width:25em;
+    margin: 0.5em 0 0.5em 0;
+}
+.forgotpassword label{
+    width:25em;
+    margin: 0.5em 0 0.5em 0;
+    font-weight: 100;
+}
+
+.orderTracking{
+    display:flex;
+    justify-content: space-around;
+    background-color: #3F5D45;
+    margin-bottom: 2em;;
+}
+.orderTracking a{
+    text-decoration: none;
+    color:white;
+}
+
+.header{
+    display:flex;
+    justify-content:space-around;
+    border-bottom: 1px solid gray;
+    background-color: white;
+    padding-top: 1em;
+}
+.search input{
+    border: 1px solid black;
+    width: 25em;
+}
+.check{
+    display:flex;
+    justify-content:space-between;
+    gap:1em;
+}
+.menu{
+    display:flex;
+    justify-content:space-evenly;
+    padding: 1em;
+    margin-bottom: 1em;
+    background-color: white;
+}
+.menuDetail a{
+    text-decoration: none;
+    color:black
+}
+.menuDetail :hover{
+    color:#3F5D45;
+    cursor: pointer;
+}
+
+.popularCategory{
+    padding: 4em 5em 2em 5em;
+    background-color: white;
+    margin-bottom: 1em;
+}
+.productCategory :hover{
+    color:#3F5D45;
+    cursor: pointer;
+}
+.productTemplate{
+    border:1px solid #ccc; 
+    padding:10px; 
+    width:180px; 
+    height: 350px;
+    position:relative;
+    background-color: white;
+}
+.productImage{
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.productName{
+    text-overflow: ellipsis;
+    text-align: center;
+    height:75px;
+    cursor: pointer;
+}
+.productName :hover{
+    color: #3F5D45;
+}
+.productName a{
+    text-decoration: none;
+    color: black;
+}
+.discount-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: red;
+        color: white;
+        padding: 5px 10px;
+        font-size: 14px;
+        border-radius: 5px;
+        font-weight: bold;
+        z-index: 10;
+    }
+.price{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.oldPrice{
+    text-decoration: line-through;
+}
+.newPrice{
+    color: #3F5D45;
+    font-weight: 600;
+}
+
+.product-container {
+        margin-top: 20px;
+        overflow: hidden; /* Ẩn phần thừa */
+        position: relative;
+        width: 100%; /* Điều chỉnh chiều rộng nếu cần */
+    }
+.product-list {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.3s ease; /* Mượt khi cuộn */
+}
+.product-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 180px;
+    flex-shrink: 0; /* Đảm bảo sản phẩm không bị co lại */
+    }
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+}
+.arrow-left {
+    left: 10px;
+}
+.arrow-right {
+    right: 10px;
+}
+.arrow.disabled {
+    background-color: rgba(0, 0, 0, 0.2); /* Làm mờ khi không thể cuộn */
+    cursor: not-allowed;
+}
+
+.chooseProduct, .chooseBlog{
+    margin: 2em 5em 2em 5em;
+    display:flex;
+    justify-content: space-between;
+}
+.menuProduct, .menuBlog{
+    width: 20em;
+    background-color: white;
+    border: 1px solid whitesmoke;
+    overflow-y: auto;
+    padding: 2em 2em 2em 2em;
+}
+.menuBlog{
+    background-color: whitesmoke !important;
+}
+.menuBlog a{
+    text-decoration: none;
+    color: black;
+}
+.menuBlog a:hover{
+    color: #3b5d47;
+}
+.menuBlog hr {
+    border: 0;
+    border-top: 1px solid black;
+    margin: 10px 0;
+}
+.listProduct, .listBlog{
+    width: 60em;
+    background-color: white;
+    border: 1px solid whitesmoke;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 1em;
+    column-gap: 0.5em;
+}
+.listBlog{
+    background-color: whitesmoke !important;
+}
+
+.detailProduct{
+    display: flex;
+    flex-direction:column;
+    margin: 2em 5em 2em 5em;
+}
+.imageProduct {
+    background-color: white;
+    width: 35em;
+    height: 35em;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.imageProduct img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.typeProduct, .discountProduct {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+.typeProduct{
+    background-color: #4caf50;
+}
+.discountProduct {
+    top: 3em;
+    background-color: #daa520;
+}
+.infoProduct{
+    width: 40em;
+    background-color: white;
+    padding: 2em 2em 2em 2em;
+}
+.nameProduct{
+    font-size: 24px;
+    font-weight: 500;
+}
+.old-price {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 28px;
+    margin-right: 2em;
+}
+.new-price {
+    font-size: 28px;
+    color: #3F5D45;
+    font-weight: 500;
+}
+.categoryProduct{
+    margin: 1em 0 1em 0;
+    font-size: 16px;
+}
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+    }
+.tab-button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    margin-right: 5px;
+}
+.tab-button.active {
+    background-color: #3b5d47;
+    color: white;
+}
+.tab-content {
+    display: none;
+    margin-top: 20px;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 2em 2em 2em 2em;
+}
+.tab-content.active {
+    display: block;
+}
+.optionProduct{
+    display: flex;
+    gap: 2em;
+    margin-bottom: 2em;
+}
+
+.size label, .option label{
+    margin-bottom: 0.5em;
+}
+.size select, .option select{
+    width: 12em;
+    height: 3em;
+    text-align: center;
+}
+
+.blogImage{
+    width: 12em;
+    height:10em;
+    overflow: hidden;
+}
+.blogImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.blogTemplate {
+    border: 1px solid white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1em;
+    background-color: white;
+    transition: transform 0.3s ease;
+    width:14em;
+}
+.blogTemplate:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.blogName p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+    height:7em;
+}
+.blogDate p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+.blogDescription p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+}
+hr {
+    border: 0;
+    border-top: 1px solid black;
+    margin: 10px 0;
+}
+
+.detailBlog{
+    margin: 2em 5em 2em 5em;
+    border: 1px solid white;
+    padding: 2em 2em 2em 2em;
+    background-color: white;
+}
+.headerBlog{
+    font-size: 24px;
+    font-weight: 600;
+}
+.subHeaderBlog{
+    display: flex;
+    gap: 2em;
+    margin-bottom: 1em;
+}
+.subHeaderBlog a{
+    text-decoration: none;
+}
+.mainBlog img{
+    max-width: 100%;
+    height: auto;
+}
+
+.reviewProduct{
+    margin-top: 20px;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 2em 2em 2em 2em;
+    width:50em;
+}
+.rateProduct{
+    margin-top: 20px;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 2em 2em 2em 2em;
+    width: 30em;
+    height: 30em;
+}
+
+.star.selected {
+    color: gold !important;
+}
+.star.hover {
+    color: orange !important;
+}
+.reviewDetail{
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}

@@ -1,0 +1,120 @@
+.d-sm-inline{
+    margin-left: 15px;
+    color:gray;
+}
+.px-sm-2 {
+    background-color: white !important;
+}
+.mb-md-0{
+    color:Gray !important;
+}
+
+.loginAdmin{
+    width: 25em;
+    height: 15em;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 7em 0 0 35em;
+    text-align: center;
+}
+.loginAdmin input{
+    width: 20em;
+    margin: 0.5em 0 0.5em 0;
+}
+.loginAdmin a{
+    text-decoration: none;
+}
+.loginAdmin button{
+    border-radius: 10px;
+    border: 0.5px solid black;
+    margin-top:1em;
+}
+
+.background{
+    background-color: whitesmoke;
+    padding: 2% 2% 2% 2%;
+}
+.Add{
+    display:flex;
+    justify-content:space-around;
+    background-color: white;
+    margin-bottom: 5%;
+    
+}
+.Table{
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 5% 2% 5% 2%
+
+}
+.Table table{
+    width:100%
+}
+.Table th{
+    border: 1px solid black;
+    text-align: center;
+}
+.Table td{
+    border: 1px solid black;
+    text-align: center;
+}
+
+.formUpdate{
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 5% 2% 5% 2%
+}
+.formUpdate input{
+    width:100%;
+    margin: 1% 0 1% 0;
+}
+.formUpdate select{
+    width:100%;
+    margin: 1% 0 1% 0;
+}
+.formUpdate button{
+    width: 20%;
+    height: 5%;
+    margin: 1% 0 1% 0;
+}
+
+.productDetail{
+    display:flex;
+    justify-content:space-between;
+    margin-right:2em;
+}
+.productInfo1{
+    background-color: whitesmoke;
+    padding: 2em;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    margin-right: 2em;
+}
+.productInfo2{
+    display:flex;
+    flex-direction: column;
+}
+.productPrice{
+    background-color: whitesmoke;
+    padding: 2em;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    margin-bottom: 2em;
+}
+.productCategory{
+    background-color: whitesmoke;
+    padding: 2em;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+}
+
+.filter{
+    display:flex;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 1em;
+    padding: 1em;
+}
