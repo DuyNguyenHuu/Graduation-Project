@@ -12,7 +12,7 @@ class ProductReviewController extends Controller
                 ->join('users', 'users.IdUser', '=', 'reviews.IdUser')
                 ->join('products', 'products.IdProduct', '=', 'reviews.IdProduct_Review')
                 ->select('products.NameProduct', 'users.Name', 'reviews.*')
-                ->orderByDesc('reviews.IdReview');
+                ->orderByDesc('reviews.created_at');
         if ($request->has('search') && !empty($request->search)) {
             $keyword = $request->search;
             $query->where(function ($q) use ($keyword) {

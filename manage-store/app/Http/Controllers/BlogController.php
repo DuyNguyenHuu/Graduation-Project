@@ -9,12 +9,24 @@ use Mews\Purifier\Facades\Purifier;
 
 class BlogController extends Controller
 {
-    public function index(){
-        $getBlog=DB::table('blogs')
-                    ->join('bcategories', 'blogs.CategoryBlog', '=', 'bcategories.IdBCategory')
-                    ->select('*')->get();
-        return view('blogs.blogs.indexBlog', compact('getBlog'));
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
+
+        $getBlog = DB::table('blogs')
+            ->join('bcategories', 'blogs.CategoryBlog', '=', 'bcategories.IdBCategory')
+            ->select('blogs.*', 'bcategories.BCategory')
+            ->when($search, function ($query, $search) {
+                return $query->where('blogs.Blog', 'like', '%' . $search . '%')
+                            ->orWhere('bcategories.BCategory', 'like', '%' . $search . '%');
+            })
+            ->orderBy('blogs.IdBlog', 'DESC')
+            ->paginate(10)
+            ->appends(['search' => $search]);
+
+        return view('blogs.blogs.indexBlog', compact('getBlog', 'search'));
     }
+
     public function create(){
         $getCategoryBlog=DB::table('bcategories')->select('*')->get();
         return view('blogs.blogs.addBlog', compact('getCategoryBlog'));

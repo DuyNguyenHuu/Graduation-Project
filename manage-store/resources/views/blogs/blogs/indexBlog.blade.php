@@ -5,10 +5,16 @@
             <div>
                 <p>Blog</p>
             </div>
-            <div>
+            <div style="display:flex; gap: 3em">
+                <form method="GET" action="">
+                    <input type="text" name="search" placeholder="Search Blog..." value="{{ $search ?? '' }}">
+                    <button type="submit">Search</button>
+                </form>
+
                 <a href="blogs/create" role="button" style="text-decoration: none">Add</a>
             </div>
         </div>
+
         <div class="Table">
             <table>
                 <tr>
@@ -45,6 +51,11 @@
                     </tr>
                 @endforeach
             </table>
+            <div style="margin-top: 20px">
+                <div class="d-flex justify-content-center mt-4">
+                    {{ $getBlog->links('pagination::bootstrap-5') }}
+                </div>
+            </div>
         </div>
     </div>
 @endsection

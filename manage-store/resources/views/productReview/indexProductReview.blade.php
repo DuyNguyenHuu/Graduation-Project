@@ -31,7 +31,7 @@
                         @if ($row->Status==1)
                             <td>Enabled</td>
                         @else
-                            <td>Disenabled</td>
+                            <td>Disabled</td>
                         @endif
                         <td>
                             <div style="display:flex;justify-content:space-evenly">
