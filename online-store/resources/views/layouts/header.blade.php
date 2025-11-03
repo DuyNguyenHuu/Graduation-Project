@@ -39,17 +39,60 @@
                 <img style="height: 4em" src="https://phuongnamvina.com/img_data/images/design-logo-ban-hang-online.jpg">
             </a>
         </div>
-        <div class="search">
-            <form>
-                <input placeholder="Search Product">
-                <i class="fa-solid fa-magnifying-glass" type="submit"></i>
-            </form>
+        <div class="search" style="position: relative;">
+            <input type="text" id="searchInput" placeholder="Search Product..." autocomplete="off">
+
+            <div id="searchResult"
+                style="position:absolute; top:38px; width:100%; background:white; border:1px solid #ddd; display:none; z-index:100;"></div>
         </div>
+        <script>
+            const searchInput = document.getElementById('searchInput');
+            const searchResult = document.getElementById('searchResult');
+
+            searchInput.addEventListener('keyup', function() {
+                let query = this.value;
+
+                if(query.length < 1) {
+                    searchResult.style.display = "none";
+                    return;
+                }
+
+                fetch("{{ route('searchProduct') }}?search=" + query)
+                .then(res => res.json())
+                .then(data => {
+                    let html = '';
+
+                    if(data.length > 0){
+                        data.forEach(p => {
+                            html += `
+                                <div style="display:flex; align-items:center; padding:8px; gap:10px; cursor:pointer; border-bottom:1px solid #eee"
+                                    onclick="window.location='/products/${p.IdProduct}'">
+
+                                    <img src="${p.ImageURL}"
+                                        style="width:45px; height:45px; object-fit:cover; border-radius:4px;">
+
+                                    <div style="font-size:14px;">${p.NameProduct}</div>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        html = "<div style='padding:8px;'>No products</div>";
+                    }
+
+                    searchResult.innerHTML = html;
+                    searchResult.style.display = "block";
+                });
+            });
+
+            // Ẩn khi click ra ngoài
+            document.addEventListener('click', function(e) {
+                if(!searchInput.contains(e.target)) {
+                    searchResult.style.display = "none";
+                }
+            });
+        </script>
+
         <div class="check">
-            <div style="text-align:center">
-                <i class="fa-solid fa-code-compare"></i>
-                <p>Compare</p>
-            </div>
             <div style="text-align:center">
                 <i class="fa-regular fa-heart"></i>
                 <p>WishList</p>

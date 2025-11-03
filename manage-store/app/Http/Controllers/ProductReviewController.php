@@ -42,4 +42,10 @@ class ProductReviewController extends Controller
                         ]);
         return redirect('/productReview');
     }
+    public function destroy($IdReview)
+    {
+        DB::table('reviews')->where('IdReview', $IdReview)->delete();
+
+        return redirect('/productReview')->with('success', 'Review has been deleted.');
+    }
 }

@@ -43,6 +43,20 @@ class ProductsController extends Controller
         return view('content.products',compact('getCategory','getProduct', 'getSubCategory'));
     }
 
+    public function searchAjax(Request $request)
+    {
+        $search = $request->search;
+
+        $products = DB::table('products')
+            ->where('StatusProduct', 'Publish')
+            ->where('NameProduct', 'LIKE', "%$search%")
+            ->select('IdProduct','NameProduct','ImageURL')
+            ->limit(5)
+            ->get();
+
+        return response()->json($products);
+    }
+
     public function detailProduct($IdProduct){
         $getSubCategory=DB::table('subcategories')
                     ->join('categories', 'subcategories.IdSubCategory', '=', 'categories.IdCategory')
@@ -56,9 +70,18 @@ class ProductsController extends Controller
         $optionProduct=DB::table('options')->where('IdProduct_Option', $IdProduct)
                         ->get();
         $reviewProduct=DB::table('reviews')->where('IdProduct_Review', $IdProduct)
+                        ->where('reviews.Status', '=', 1)
                         ->join('users', 'reviews.IdUser', '=', 'users.IdUser')
                         ->get(['reviews.*', 'users.Name']);
-        return view('content.detailProduct', compact('DetailProduct', 'getSubCategory', 'getCategory', 'optionProduct', 'reviewProduct'));
+        $avgRating=round($reviewProduct->avg('Evaluate'), 1);
+        $starCount = [
+            5 => $reviewProduct->where('Evaluate', 5)->count(),
+            4 => $reviewProduct->where('Evaluate', 4)->count(),
+            3 => $reviewProduct->where('Evaluate', 3)->count(),
+            2 => $reviewProduct->where('Evaluate', 2)->count(),
+            1 => $reviewProduct->where('Evaluate', 1)->count()
+        ];
+        return view('content.detailProduct', compact('DetailProduct', 'getSubCategory', 'getCategory', 'optionProduct', 'reviewProduct', 'avgRating', 'starCount'));
     }
 
     public function submitReview(Request $request, $idProduct){

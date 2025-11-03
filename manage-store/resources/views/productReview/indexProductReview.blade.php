@@ -36,7 +36,15 @@
                         <td>
                             <div style="display:flex;justify-content:space-evenly">
                                 <div><a href="productReview/{{ $row->IdReview }}/edit"><i class="fa-solid fa-pencil"></i></a></div>
-                                <div><a href=""><i class="fa-solid fa-trash"></i></a></div>
+                                <div>
+                                    <form action="/productReview/{{ $row->IdReview }}" method="POST" onsubmit="return confirm('Are you sure to delete this review?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" style="color:red;border:none;background:none;cursor:pointer;">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </td>
                     </tr>

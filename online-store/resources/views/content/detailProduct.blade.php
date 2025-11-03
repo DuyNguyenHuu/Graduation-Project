@@ -252,7 +252,39 @@
                 @endforeach
             </div>
             <div class="rateProduct">
-                <h3>Rate Product</h3>
+                <div class="review-summary">
+                    <h3>Rating Product</h3>
+                    <div style="display:flex; align-items:center; gap:15px;">
+                        <div style="font-size:30px; font-weight:bold;">
+                            {{ $avgRating }} <span style="font-size:20px;">⭐</span>
+                        </div>
+                        <div>
+                            Total: {{ count($reviewProduct) }}
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="rating-bars">
+                    @for ($i = 5; $i >= 1; $i--)
+                        @php
+                            $percent = count($reviewProduct) > 0
+                                ? ($starCount[$i] / count($reviewProduct)) * 100
+                                : 0;
+                        @endphp
+
+                        <div style="display:flex; align-items:center; margin-bottom:5px;">
+                            <span style="width:50px; display:flex; align-items:center; gap:3px;">
+                                <span>{{ $i }}</span>
+                                <span>⭐</span>
+                            </span>
+                            <div style="width:200px; height:10px; background:#e5e5e5; margin: 0 10px;">
+                                <div style="width:{{ $percent }}%; height:100%; background:#f8b600;"></div>
+                            </div>
+                            <span>{{ $starCount[$i] }}</span>
+                        </div>
+                    @endfor
+                    </div>
+                    <hr>
             </div>
         </div>
     </div>

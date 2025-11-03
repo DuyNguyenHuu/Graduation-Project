@@ -45,15 +45,5 @@
                 </button>
             </form>
         </div>
-
-        <!-- Nút So sánh -->
-        <div>
-            <form method="POST">
-                @csrf
-                <button type="submit" style="background-color: #3F5D45; color: white; border: none; padding: 5px; cursor: pointer;">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </form>
-        </div>
     </div>
 </div>
