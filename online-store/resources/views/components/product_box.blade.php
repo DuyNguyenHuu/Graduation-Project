@@ -28,8 +28,9 @@
     <div style="margin-top: 10px; display:flex; flex-direction: row; gap: 5px;justify-content:space-evenly">
         <!-- Nút Thêm vào giỏ hàng -->
         <div>
-            <form method="POST">
+            <form method="POST" action="{{ route('cart.add') }}">
                 @csrf
+                <input type="hidden" name="product_id" value="{{ $product->IdProduct }}">
                 <button type="submit" style="background-color: #3F5D45; color: white; border: none; padding: 5px; cursor: pointer;">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </button>

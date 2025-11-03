@@ -72,6 +72,7 @@ class ProductsController extends Controller
         $reviewProduct=DB::table('reviews')->where('IdProduct_Review', $IdProduct)
                         ->where('reviews.Status', '=', 1)
                         ->join('users', 'reviews.IdUser', '=', 'users.IdUser')
+                        ->orderBy('reviews.created_at', 'desc')
                         ->get(['reviews.*', 'users.Name']);
         $avgRating=round($reviewProduct->avg('Evaluate'), 1);
         $starCount = [
@@ -92,7 +93,7 @@ class ProductsController extends Controller
             'Evaluate' => $request->input('evaluate'),
             'Comments' => $request->input('comment'),
             'created_at' => now(),
-            'status' => 0
+            'status' => 2
         ]);
 
         return redirect()->back()->with('success', 'Your review has been submitted! Please wait for admin approval.');

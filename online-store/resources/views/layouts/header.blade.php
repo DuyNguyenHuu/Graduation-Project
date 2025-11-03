@@ -98,8 +98,8 @@
                 <p>WishList</p>
             </div>
             <div style="text-align:center">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <p>Cart</p>
+                <a style="text-decoration: none; color: black" href="{{ route('cart.view') }}"><i class="fa-solid fa-cart-shopping"></i>
+                <p>Cart</p></a>
             </div>
         </div>
     </div>

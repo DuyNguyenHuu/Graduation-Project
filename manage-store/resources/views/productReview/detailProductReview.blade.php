@@ -26,6 +26,7 @@
                 <input name="reviewProductReview" value="{{ $row->Comments }}" readonly><br>
                 <label>Status: </label>
                 <select name="statusProductReview">
+                    <option value=2 {{ $row->Status == 2 ? 'selected' : '' }}>Pending</option>
                     <option value=1 {{ $row->Status == 1 ? 'selected' : '' }}>Enabled</option>
                     <option value=0 {{ $row->Status == 0 ? 'selected' : '' }}>Disabled</option>
                 </select><br>

@@ -30,8 +30,10 @@
                         <td>{{ $row->Evaluate }}</td>
                         @if ($row->Status==1)
                             <td>Enabled</td>
-                        @else
+                        @elseif ($row->Status==0)
                             <td>Disabled</td>
+                        @else
+                            <td>Pending</td>
                         @endif
                         <td>
                             <div style="display:flex;justify-content:space-evenly">

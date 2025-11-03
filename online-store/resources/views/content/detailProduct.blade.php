@@ -57,7 +57,7 @@
                         @endforeach
                     @endif
                 </div>
-                <form style="margin-bottom: 2em">
+                <form style="margin-bottom: 2em" method="POST" action="{{ route('cart.add') }}">
                     @csrf
                     @if ($optionProduct != null)
                         <div class="optionProduct">
@@ -102,15 +102,11 @@
                     @elseif ($hasType==null)
                         <input type="hidden" name="optionType" value="">
                     @endif
-                    <input type="hidden" name="idProduct" value="{{ $DetailProduct->IdProduct }}">
-                    <input type="hidden" name="finalPrice" class="final-price-input" value="{{ $DetailProduct->NewPrice }}">
-
-                    <input type="number" name="numberProduct" value="1" min="1" style="text-align: center;height: 3em;">
+                    <input type="hidden" name="product_id" value="{{ $DetailProduct->IdProduct }}">
+                    <input type="hidden" name="product_price" class="final-price-input" value="{{ $DetailProduct->NewPrice }}">
+                    <input type="number" name="product_quantity" value="1" min="1" style="text-align: center;height: 3em;">
                     <button type="submit" name="action" value="add" style="width: 10em; height:3em;background-color: #3F5D45; color: white; border-color: white; border-radius: 5px;">
                         Add to Cart
-                    </button>
-                    <button type="submit" name="action" value="buy" style="width: 10em; height:3em;background-color: #3F5D45; color: white; border-color: white; border-radius: 5px;">
-                        Buy Now
                     </button>
                 </form>
                 <form>
