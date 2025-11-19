@@ -44,3 +44,6 @@ Route::get('/blogs/category={idBCategory}', [BlogsController::class, 'index']);
 Route::get('/blogs/{idBlog}', [BlogsController::class, 'detailBlog']);
 Route::get('/carts',[CartsController::class, 'index'])->name('cart.view');
 Route::post('/add-to-cart', [CartsController::class, 'addToCart'])->name('cart.add');
+Route::delete('/carts/remove/{key}', [CartsController::class, 'remove'])->name('cart.remove');
+Route::patch('/cart/increase/{key}', [CartsController::class, 'increase'])->name('cart.increase');
+Route::patch('/cart/decrease/{key}', [CartsController::class, 'decrease'])->name('cart.decrease');
