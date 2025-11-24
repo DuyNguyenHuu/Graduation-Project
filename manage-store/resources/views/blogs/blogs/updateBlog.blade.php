@@ -14,9 +14,9 @@
             @csrf
             @method('PUT')
             <label>Name Blog:</label><br>
-            <input name="nameBlog" id="NameBlog" value="{{ $blogShow->Blog }}"><br>
+            <input name="nameBlog" id="NameBlog" value="{{ $blogShow->Blog }} required"><br>
             <label>Id Blog:</label><br>
-            <input name="idBlog" id="BlogSlug" value="{{ $blogShow->IdBlog }}"><br>
+            <input name="idBlog" id="BlogSlug" value="{{ $blogShow->IdBlog }} required"><br>
             <label>Image Blog:</label><br>
             <input name="imageBlog" value="{{ $blogShow->ImageBlog }}"><br>
             <label>Name Category</label><br>

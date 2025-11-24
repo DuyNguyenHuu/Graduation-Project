@@ -59,7 +59,10 @@
     border: 1px solid black;
     text-align: center;
 }
-
+.category{
+    background-color: whitesmoke;
+    padding: 2% 2% 2% 2%;
+}
 .formUpdate{
     width: 100%;
     background-color: white;
@@ -78,6 +81,10 @@
     width: 20%;
     height: 5%;
     margin: 1% 0 1% 0;
+    background-color:#3F5D45;
+    color:white;
+    border-radius: 10px;
+    border: 0.5px solid white;
 }
 
 .productDetail{
@@ -117,4 +124,30 @@
     border-radius: 10px;
     margin-bottom: 1em;
     padding: 1em;
+}
+#toastsuccess{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #4caf50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+#toastfail{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #e74c3c;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity .5s ease;
 }

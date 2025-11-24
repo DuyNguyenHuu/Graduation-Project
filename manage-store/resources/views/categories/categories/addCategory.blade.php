@@ -13,9 +13,9 @@
         <form action="/categories" method="POST">
             @csrf
             <label>Name Category:</label><br>
-            <input name="nameCategory" id="NameCategory" placeholder="Enter Name Category"><br>
+            <input name="nameCategory" id="NameCategory" placeholder="Enter Name Category" required><br>
             <label>Id Category:</label><br>
-            <input name="idCategory" id="CategorySlug" placeholder="Enter Id Category"><br>
+            <input name="idCategory" id="CategorySlug" placeholder="Enter Id Category" required><br>
             <label>Status</label><br>
             <select name="statusCategory">
                 <option value="1">Enabled</option>

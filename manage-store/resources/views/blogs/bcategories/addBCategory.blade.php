@@ -13,9 +13,9 @@
         <form action="/bcategories" method="POST">
             @csrf
             <label>Name Category Blog:</label><br>
-            <input name="nameBCategory" id="NameBCategory" placeholder="Enter Name Category Blog"><br>
+            <input name="nameBCategory" id="NameBCategory" placeholder="Enter Name Category Blog" required><br>
             <label>Id Category Blog:</label><br>
-            <input name="idBCategory" id="BCategorySlug" placeholder="Enter Id Category Blog"><br>
+            <input name="idBCategory" id="BCategorySlug" placeholder="Enter Id Category Blog" required><br>
             <label>Status</label><br>
             <select name="statusBCategory">
                 <option value="1">Enabled</option>

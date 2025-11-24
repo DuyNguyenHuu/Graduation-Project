@@ -51,14 +51,20 @@
                         <select id="category" name="categoryProduct"  onchange="filterSubCategories()">
                             <option value="">Category</option>
                             @foreach ($categoryList as $row)
-                                <option value="{{ $row->IdCategory }}" {{ !is_null($productCategory) && $row->IdCategory == $productCategory->IdCategory ? 'selected' : '' }}>{{ $row->NameCategory }}</option>
+                                <option value="{{ $row->IdCategory }}" {{ $row->IdCategory == optional($productCategory)->IdCategory ? 'selected' : '' }}>
+                                    {{ $row->NameCategory }}
+                                </option>
+
                             @endforeach
                         </select>
                         <label>Sub Category:</label>
                         <select id="subcategory" name="subCategoryProduct">
                             <option value="">Sub Category</option>
                             @foreach ($subCategoryList as $row)
-                                <option value="{{ $row->IdSub }}" data-category="{{ $row->IdSubCategory }}" {{ !is_null($productCategory) && $row->IdSub == $productCategory->IdSub ? 'selected' : '' }}>{{ $row->Name }}</option>
+                                <option value="{{ $row->IdSub }}" data-category="{{ $row->IdSubCategory }}"
+                                    {{ $row->IdSub == optional($productCategory)->IdSub ? 'selected' : '' }}>
+                                    {{ $row->Name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>

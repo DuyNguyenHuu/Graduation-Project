@@ -13,9 +13,9 @@
         <form action="/blogs" method="POST">
             @csrf
             <label>Name Blog:</label><br>
-            <input name="nameBlog" id="NameBlog" placeholder="Enter Name Blog"><br>
+            <input name="nameBlog" id="NameBlog" placeholder="Enter Name Blog" required><br>
             <label>Id Blog:</label><br>
-            <input name="idBlog" id="BlogSlug" placeholder="Enter Id Blog"><br>
+            <input name="idBlog" id="BlogSlug" placeholder="Enter Id Blog" required><br>
             <label>Image Blog:</label><br>
             <input name="imageBlog" placeholder="Enter Image Blog"><br>
             <label>Category Blog:</label>

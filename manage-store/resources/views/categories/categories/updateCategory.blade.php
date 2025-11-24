@@ -14,9 +14,9 @@
             @csrf
             @method('PUT')
             <label>Name Category:</label><br>
-            <input name="nameCategory" id="NameCategory" value="{{ $categoryShow->NameCategory }}"><br>
+            <input name="nameCategory" id="NameCategory" value="{{ $categoryShow->NameCategory }}" required><br>
             <label>Id Category:</label><br>
-            <input name="idCategory" id="CategorySlug" value="{{ $categoryShow->IdCategory }}"><br>
+            <input name="idCategory" id="CategorySlug" value="{{ $categoryShow->IdCategory }}" required><br>
             <label>Status</label><br>
             <select name="statusCategory" value="{{ $categoryShow->Status }}">
                 <option value="1" {{ $categoryShow->Status == 1 ? 'selected' : '' }}>Enabled</option>

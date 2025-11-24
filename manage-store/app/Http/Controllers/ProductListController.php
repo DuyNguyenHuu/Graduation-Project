@@ -78,21 +78,63 @@ class ProductListController extends Controller
     }
 
     public function edit($IdProduct){
-        $productDescription=DB::table('products')
-                            ->where('products.IdProduct', $IdProduct)
-                            ->first();
-        $productCategory=DB::table('subcategories')
-                            ->join('categories', 'subcategories.IdSubCategory', '=', 'categories.IdCategory')
-                            ->where('subcategories.IdSub', $productDescription->SubCategory)
-                            ->where('subcategories.IdSubCategory', $productDescription->Category)
-                            ->first();
-        $categoryList=DB::table('categories')->select('*')->get();
-        $subCategoryList=DB::table('subcategories')
-                        ->join('categories', 'subcategories.IdSubCategory', '=', 'categories.IdCategory')
-                        ->select('*')
-                        ->get();
-        return view('productList.updateProductList', compact('productDescription','productCategory', 'categoryList', 'subCategoryList'));
+        $productDescription = DB::table('products')
+            ->where('IdProduct', $IdProduct)
+            ->first();
+
+        // Nếu KHÔNG có category → không thể join → để null
+        if (!$productDescription->Category) {
+            $productCategory = null;
+
+        // Nếu có category nhưng KHÔNG có subcategory
+        } elseif ($productDescription->Category && !$productDescription->SubCategory) {
+
+            $productCategory = DB::table('categories')
+                ->where('IdCategory', $productDescription->Category)
+                ->select(
+                    'categories.IdCategory',
+                    'categories.NameCategory'
+                )
+                ->first();
+
+            // Thêm giá trị IdSub = null để Blade không bị lỗi
+            if ($productCategory) {
+                $productCategory->IdSub = null;
+            }
+
+        // Nếu có cả category + subcategory
+        } else {
+
+            $productCategory = DB::table('subcategories')
+                ->join('categories', 'subcategories.IdSubCategory', '=', 'categories.IdCategory')
+                ->where('subcategories.IdSub', $productDescription->SubCategory)
+                ->select(
+                    'categories.IdCategory',
+                    'subcategories.IdSub'
+                )
+                ->first();
+        }
+
+        // Lấy list
+        $categoryList = DB::table('categories')->get();
+
+        $subCategoryList = DB::table('subcategories')
+            ->join('categories', 'subcategories.IdSubCategory', '=', 'categories.IdCategory')
+            ->select(
+                'subcategories.IdSub',
+                'subcategories.IdSubCategory',
+                'subcategories.Name'
+            )
+            ->get();
+
+        return view('productList.updateProductList', compact(
+            'productDescription',
+            'productCategory',
+            'categoryList',
+            'subCategoryList'
+        ));
     }
+
 
     public function update(request $request, $IdProduct){
         $request->validate([

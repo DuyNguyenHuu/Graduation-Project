@@ -19,11 +19,11 @@
                     <option value="{{ $row->IdCategory }}" {{ $row->IdCategory == $subCategoryShow->IdCategory ? 'selected' :''}}>{{ $row->NameCategory }}</option>
                 @endforeach
             </select>
-            <input type="" name="hiddenCategory" value="{{ $subCategoryShow->IdCategory }}">
+            <input type="hidden" name="hiddenCategory" value="{{ $subCategoryShow->IdCategory }}">
             <label>Name</label><br>
-            <input name="nameSubCategory" id="nameSubCategory"value="{{ $subCategoryShow->Name }}"><br>
+            <input name="nameSubCategory" id="nameSubCategory"value="{{ $subCategoryShow->Name }}" required><br>
             <label>Id Sub</label><br>
-            <input name="idSubCategory" id="SubCategorySlug"value="{{ $subCategoryShow->IdSub }}"><br>
+            <input name="idSubCategory" id="SubCategorySlug"value="{{ $subCategoryShow->IdSub }}" required><br>
             <label>Status</label>
             <select name="statusSubCategory">
                 <option value="1" {{ $subCategoryShow->StatusSub == 1 ? 'selected' : '' }}>Enabled</option>

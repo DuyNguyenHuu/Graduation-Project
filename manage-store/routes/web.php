@@ -9,6 +9,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\BCategoryController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashBoardController;
+use App\Http\Controllers\CouponController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,19 +29,24 @@ use App\Http\Controllers\DashBoardController;
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/dashBoard', [DashBoardController::class, 'index'])->name('dashBoard');
+        Route::get('/', [DashBoardController::class, 'index'])->name('dashBoard');
         Route::resource('/categories', CategoryController::class);
         Route::resource('/subcategories', SubCategoryController::class);
-        Route::resource('/productList', ProductListController::class);
+
         Route::resource('/bcategories', BCategoryController::class);
         Route::resource('/blogs', BlogController::class);
 
+        Route::resource('/productList', ProductListController::class);
         Route::get('/productList/{productList}/attributes',[ProductListController::class, 'attribute'])->name('productList.attribute');
         Route::get('/productList/{productList}/attributes/create', [ProductListController::class, 'createAttribute'])->name('productList.createAttribute');
         Route::post('/productList/{productList}/attributes', [ProductListController::class, 'storeAttribute'])->name('productList.storeAttribute');
         Route::get('/productList/{productList}/attributes/{idOption}/edit',[ProductListController::class,'editAttribute'])->name('productList.editAttribute');
         Route::put('/productList/{productList}/attributes/{idOption}',[ProductListController::class,'updateAttribute'])->name('productList.updateAttribute');
         Route::delete('/productList/{productList}/attributes/{idOption}',[ProductListController::class,'destroyAttribute'])->name('productList.destroyAttribute');
+
         Route::resource('/productReview', ProductReviewController::class);
+
+        Route::resource('/coupons', CouponController::class);
 
         Route::get('/logout', [UserController::class, 'logout'])->name('logout');
     });

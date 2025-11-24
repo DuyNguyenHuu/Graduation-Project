@@ -65,7 +65,18 @@
                             </li>
                         </ul>
                     </li>
-                    
+                    <li>
+                        <a href="#submenu5" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Manage Ecommerce</span></a>
+                        <ul class="collapse nav flex-column ms-1" id="submenu5" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="{{ url('coupons') }}" class="nav-link px-0"> <span class="d-none d-sm-inline">Coupons</span></a>
+                            </li>
+                            <li>
+                                <a href="" class="nav-link px-0"> <span class="d-none d-sm-inline">Banner</span></a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="#" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>

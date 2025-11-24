@@ -19,11 +19,11 @@
                 <option value="TYPE" {{ $optionEdit->OptionProduct =="TYPE"? "selected" : "" }}>TYPE</option>
             </select>
             <label>Sub Option:</label><br>
-            <input name="subOptionProduct" value="{{ $optionEdit->SubOption }}"><br>
+            <input name="subOptionProduct" value="{{ $optionEdit->SubOption }}" required><br>
             <label>Quantity:</label><br>
-            <input name="quantityProduct" type="number" min=0 value="{{ $optionEdit->Quantity }}"><br>
+            <input name="quantityProduct" type="number" min=0 value="{{ $optionEdit->Quantity }}" required><br>
             <label>Bonus Price:</label><br>
-            <input name="priceProduct" type="number" step=0.01 value="{{ $optionEdit->BonusPrice }}"><br>
+            <input name="priceProduct" type="number" step=0.01 value="{{ $optionEdit->BonusPrice }}" required><br>
             <button type="submit">Submit</button>
         </form>
     </div>

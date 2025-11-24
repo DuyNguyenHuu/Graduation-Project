@@ -15,9 +15,9 @@
             <div class="productDetail">
                 <div class="productInfo1">
                     <label>Name Product:</label><br>
-                    <input type="text" name="nameProduct" id="NameProduct" placeholder="Enter Name Product"><br>
+                    <input type="text" name="nameProduct" id="NameProduct" placeholder="Enter Name Product" required><br>
                     <label>Id Product:</label>
-                    <input type="text" name="idProduct" id="ProductSlug" placeholder="Enter Id Product"><br>
+                    <input type="text" name="idProduct" id="ProductSlug" placeholder="Enter Id Product" required><br>
                     <label>Type Product:</label>
                     <select name="typeProduct">
                         <option value="">Type Product</option>
@@ -40,7 +40,7 @@
                 <div class="productInfo2">
                     <div class="productPrice">
                         <label>New Price:</label><br>
-                        <input type="number" name="newPriceProduct" step="0.01" min="0" value="{{ old('newPriceProduct', 0) }}" placeholder="Enter New Price Product"><br>
+                        <input type="number" name="newPriceProduct" step="0.01" min="0" value="{{ old('newPriceProduct', 0) }}" placeholder="Enter New Price Product" required><br>
                         <label>Old Price:</label><br>
                         <input type="number" name="oldPriceProduct" step="0.01" min="0" value="{{ old('oldPriceProduct', 0) }}" placeholder="Enter Old Price Product"><br>
                     </div>

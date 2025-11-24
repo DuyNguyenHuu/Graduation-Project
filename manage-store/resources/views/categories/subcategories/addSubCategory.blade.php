@@ -19,9 +19,9 @@
                 @endforeach
             </select><br>
             <label>Sub Name</label><br>
-            <input name="nameSubCategory" id="nameSubCategory"placeholder="Enter Name Sub Category"><br>
+            <input name="nameSubCategory" id="nameSubCategory"placeholder="Enter Name Sub Category" required><br>
             <label>Id Sub</label><br>
-            <input name="idSubCategory" id="SubCategorySlug"placeholder="Enter Slug Sub Category"><br>
+            <input name="idSubCategory" id="SubCategorySlug"placeholder="Enter Slug Sub Category" required><br>
             <label>Status</label><br>
             <select name="statusSub">
                 <option value="1">Enabled</option>
