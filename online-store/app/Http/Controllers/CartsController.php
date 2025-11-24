@@ -89,4 +89,44 @@ class CartsController extends Controller
         return back();
     }
 
+    public function applyCoupon(Request $request){
+        $code=$request->coupon_code;
+        $coupon=DB::table('coupons')
+                ->where('Code', $code)
+                ->where('StatusCoupon', 1)
+                ->first();
+        if(!$coupon){
+            return back()->with('coupon_error', 'Coupon not found!');
+        }
+        $today = now()->toDateString();
+        if($today<$coupon->StartDate || $today>$coupon->EndDate){
+            return back()->with('coupon_error', 'Coupon expired!');
+        }
+        if($coupon->Time==0 && $coupon->Time != null){
+            return back()->with('coupon_error', 'Coupon expired!');
+        }
+        if($request->total<$coupon->ConditionCoupon){
+            return back()->with('coupon_error', 'Total is not enough for this coupon!');
+        }
+        $cart = session()->get('cart', []);
+
+        if (!$cart) {
+            return back()->with('coupon_error', 'Cart is empty!');
+        }
+        if($coupon->DiscountType==1){
+            $final_total=$request->total*(100-$coupon->DiscountValue)/100;
+            $discount=$request->total-$final_total;
+        }
+        if($coupon->DiscountType==2){
+            $final_total=$request->total-$coupon->DiscountValue;
+            $discount=$coupon->DiscountValue;
+        }
+        session()->put('coupon', [
+            'Title'=> $coupon->Title,
+            'code' => $coupon->Code,
+            'discount' => $discount,
+            'final_total' => $final_total
+        ]);
+        return back()->with('coupon_success', $coupon->Code.' applied successfully!');
+    }
 }

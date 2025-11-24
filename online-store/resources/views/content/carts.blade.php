@@ -57,13 +57,26 @@
     <div class="cart-summary">
         <div class="cart-summary-row">
             <div>
-                <form>
-                    <input type="text" placeholder="Coupon code">
+                <form action="{{ route('cart.applyCoupon') }}" method="POST">
+                    @csrf
+                    <input type="text" name="coupon_code" placeholder="Coupon code">
+                    <input type="hidden" name="total" value="{{ $total }}">
                     <button type="submit">Apply Coupon</button>
                 </form>
+                @if(session('coupon_error'))
+                    <p style="color:red">{{ session('coupon_error') }}</p>
+                @endif
+
+                @if(session('coupon_success'))
+                    <p style="color:green">{{ session('coupon_success') }}</p>
+                @endif
             </div>
             <div>
                 <h3>Total: {{ number_format($total) }}$</h3>
+                @if(session('coupon'))
+                    <h3>Discount: -{{ number_format(session('coupon.discount')) }}$</h3>
+                    <h3>Final Total: {{ number_format(session('coupon.final_total')) }}$</h3>
+                @endif
             </div>
         </div>
         <div class="cart-summary-buttons">

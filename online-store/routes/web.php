@@ -47,3 +47,4 @@ Route::post('/add-to-cart', [CartsController::class, 'addToCart'])->name('cart.a
 Route::delete('/carts/remove/{key}', [CartsController::class, 'remove'])->name('cart.remove');
 Route::patch('/cart/increase/{key}', [CartsController::class, 'increase'])->name('cart.increase');
 Route::patch('/cart/decrease/{key}', [CartsController::class, 'decrease'])->name('cart.decrease');
+Route::post('/carts/apply-coupon', [CartsController::class, 'applyCoupon'])->name('cart.applyCoupon');
