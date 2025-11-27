@@ -114,7 +114,7 @@ class CartsController extends Controller
             return back()->with('coupon_error', 'Cart is empty!');
         }
         if($coupon->DiscountType==1){
-            $final_total=$request->total*(100-$coupon->DiscountValue)/100;
+            $final_total = round($request->total * (100 - $coupon->DiscountValue) / 100, 2);
             $discount=$request->total-$final_total;
         }
         if($coupon->DiscountType==2){
@@ -122,7 +122,7 @@ class CartsController extends Controller
             $discount=$coupon->DiscountValue;
         }
         session()->put('coupon', [
-            'Title'=> $coupon->Title,
+            'title'=> $coupon->Title,
             'code' => $coupon->Code,
             'discount' => $discount,
             'final_total' => $final_total

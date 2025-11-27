@@ -40,7 +40,7 @@
                     </td>
                     <td>{{ $item['size'] }}</td>
                     <td>{{ $item['type'] }}</td>
-                    <td>{{ number_format($item['price'] * $item['quantity']) }}$</td>
+                    <td>{{ number_format($item['price'] * $item['quantity'], 2, '.', ',') }}$</td>
                     <td>
                         <form action="{{ route('cart.remove', $key) }}" method="POST">
                             @csrf
@@ -52,6 +52,9 @@
                     </td>
                 </tr>
             @endforeach
+            <?php
+                session()->put('total',$total,);
+            ?>
         </table>
     </div>
     <div class="cart-summary">
@@ -72,10 +75,14 @@
                 @endif
             </div>
             <div>
-                <h3>Total: {{ number_format($total) }}$</h3>
-                @if(session('coupon'))
-                    <h3>Discount: -{{ number_format(session('coupon.discount')) }}$</h3>
-                    <h3>Final Total: {{ number_format(session('coupon.final_total')) }}$</h3>
+                @if(session('cart') != null)
+                    <h3>Total: {{ number_format($item['price'] * $item['quantity'], 2, '.', ',');}}$</h3>
+                    @if(session('coupon'))
+                        <h3>Discount: -{{ number_format(session('coupon.discount', 2, '.', ',')) }}$</h3>
+                        <h3>Final Total: {{ number_format(session('coupon.final_total', 2, '.', ',')) }}$</h3>
+                    @endif
+                @elseif(session('cart')==null)
+                    <?php session()->forget('coupon')?>
                 @endif
             </div>
         </div>
@@ -86,12 +93,11 @@
                     Back to Shopping
                 </button>
             </a>
-            <a href="">
-                <button>
-                    Checkout
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </a>
+            @if(session()->has('cart') && count(session('cart')) > 0)
+                <a href="{{ route('checkout.form') }}">
+                    <button>Checkout</button>
+                </a>
+            @endif
         </div>
     </div>
 

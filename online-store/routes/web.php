@@ -9,6 +9,7 @@ use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\CartsController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,7 @@ Route::delete('/carts/remove/{key}', [CartsController::class, 'remove'])->name('
 Route::patch('/cart/increase/{key}', [CartsController::class, 'increase'])->name('cart.increase');
 Route::patch('/cart/decrease/{key}', [CartsController::class, 'decrease'])->name('cart.decrease');
 Route::post('/carts/apply-coupon', [CartsController::class, 'applyCoupon'])->name('cart.applyCoupon');
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.form')->middleware('auth');
+Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.process')->middleware('auth');
+Route::get('/checkout/invoice', [CheckoutController::class, 'invoice'])->name('checkout.invoice')->middleware('auth');

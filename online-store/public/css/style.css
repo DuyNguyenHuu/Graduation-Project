@@ -29,6 +29,7 @@
 .register h3{
     margin:0.5em 0 0 6em;
 }
+
 .forgotpassword{
     border: 1px solid black;
     border-radius: 10px;
@@ -76,6 +77,7 @@
     justify-content:space-between;
     gap:1em;
 }
+
 .menu{
     display:flex;
     justify-content:space-evenly;
@@ -567,4 +569,181 @@ hr {
 
 .cart-summary-buttons a:first-child button:hover {
     background: #6f7371;
+}
+
+.deliInfo{
+    max-width: 420px;
+    margin: 20px auto;
+    padding: 25px;
+    background: #f7f7f7;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+    color: #3F5D45;
+}
+.deliInfo h2{
+    text-align: center;
+    color: #3F5D45;
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+.deliInfo label{
+    font-weight: bold;
+    color: #3F5D45;
+    margin-top: 6px;
+    display: block;
+}
+.deliInfo input[type="text"],
+select{
+    width: 100%;
+        padding: 8px;
+        margin: 6px 0 10px 0;
+        border: 2px solid #3F5D45;
+        border-radius: 8px;
+        font-size: 14px;
+        background: #fff;
+        color: #3F5D45;
+        outline: none;
+        transition: 0.2s;
+}
+.deliInfo input[type="text"]:focus,
+select:focus {
+    border-color: #2c4431;
+    box-shadow: 0 0 5px rgba(63,93,69,0.4);
+}
+.deliInfo button {
+    width: 100%;
+    padding: 12px;
+    background: #3F5D45;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.deliInfo button:hover {
+    background: #2d4333;
+}
+
+.invoice {
+    max-width: 1100px;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(63, 93, 69, 0.12);
+}
+
+/* Title */
+.invoice h3 {
+    color: #3F5D45;
+    margin-bottom: 12px;
+}
+/*Button*/
+.invoice button{
+    padding: 10px 18px;
+    background: #3b5d47;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top:12px
+}
+
+/* Delivery Info Box */
+.invoice_info {
+    background: #fff;
+    padding: 18px 20px;
+    border-left: 4px solid #3F5D45;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+}
+
+.invoice_info span {
+    font-weight: 600;
+    color: #3F5D45;
+}
+
+/* Order layout */
+.invoice_order {
+    display: flex;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+/* Product list */
+.invoice_product {
+    flex: 2;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.invoice_product img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #E5E7EB;
+}
+
+.invoice_product a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    text-decoration: none;
+    color: #1f2933;
+    background: #fafafa;
+    padding: 10px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.invoice_product a:hover {
+    background: #eef3ee;
+}
+
+.invoice_product p {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.invoice_product span {
+    color: #3F5D45;
+}
+
+/* Summary box */
+.invoice_total {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+}
+
+.invoice_total span {
+    color: #3F5D45;
+    font-weight: 600;
+}
+
+.invoice_total h3 {
+    margin-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .invoice_order {
+        flex-direction: column;
+    }
 }
