@@ -2,10 +2,6 @@
 
 @section('content')
 <div>
-    <div class="filterProduct">
-
-    </div>
-
     <div class="chooseProduct">
         <div class="menuProduct">
             <!-- Hiển thị danh mục-->

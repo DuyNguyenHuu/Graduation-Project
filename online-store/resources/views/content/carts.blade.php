@@ -76,7 +76,7 @@
             </div>
             <div>
                 @if(session('cart') != null)
-                    <h3>Total: {{ number_format($item['price'] * $item['quantity'], 2, '.', ',');}}$</h3>
+                    <h3>Total: {{ number_format($total, 2, '.', ',');}}$</h3>
                     @if(session('coupon'))
                         <h3>Discount: -{{ number_format(session('coupon.discount', 2, '.', ',')) }}$</h3>
                         <h3>Final Total: {{ number_format(session('coupon.final_total', 2, '.', ',')) }}$</h3>

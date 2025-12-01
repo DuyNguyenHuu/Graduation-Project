@@ -34,6 +34,8 @@ class AccountsController extends Controller
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             // Tạo lại session để tránh session fixation
             $request->session()->regenerate();
+            session()->forget('cart');
+            session()->forget('coupon');
 
             // Chuyển hướng đến trang chủ
             return redirect()->route('home');

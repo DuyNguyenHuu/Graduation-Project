@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     // Hiển thị form login
-    public function index()
+    public function loginPage()
     {
         return view('login');
     }
@@ -70,5 +71,53 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/login')->with('success', 'You have logged out successfully!');
+    }
+
+    public function index(Request $request){
+        $query = DB::table('users');
+
+        if ($request->search) {
+            $query->where(function($q) use ($request) {
+                $q->where('Name', 'like', '%' . $request->search . '%')
+                ->orWhere('email', 'like', '%' . $request->search . '%')
+                ->orWhere('Phone', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        if ($request->status) {
+            $query->where('Status', $request->status);
+        }
+
+        if ($request->role) {
+            $query->where('ROLE', $request->role);
+        }
+
+        if ($request->from_date){
+            $query->where('created_at', '>=', $request->from_date);
+        }
+        if ($request->to_date){
+            $query->where('created_at', '<=', $request->to_date);
+        }
+
+        $getUser = $query->orderBy('Status', 'desc')
+                        ->orderBy('ROLE', 'desc')
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(10)->appends($request->all());
+
+        return view('users.indexUser', compact('getUser'));
+    }
+
+    public function edit($idUser){
+        $getUserById = DB::table('users')->where('IdUser', $idUser)->first();
+        return view('users.updateUser', compact('getUserById'));
+    }
+
+    public function update($idUser){
+        DB::table('users')->where('IdUser', $idUser)->update([
+            'Status' => request('status'),
+            'ROLE' => request('role'),
+            'updated_at' => now()
+        ]);
+        return redirect('/users')->with('success', 'User updated successfully!');
     }
 }

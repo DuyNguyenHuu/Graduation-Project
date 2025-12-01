@@ -78,7 +78,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 align-middle">
+                        <a href="{{ url('users') }}" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
                     </li>
                 </ul>
@@ -87,7 +87,9 @@
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
                         <span class="d-none d-sm-inline mx-1">{{-- Kiểm tra nếu người dùng đã đăng nhập và hiển thị tên của người dùng --}}
-                            
+                            @if (Auth::check())
+                                {{ Auth::user()->Name }}
+                            @endif
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">

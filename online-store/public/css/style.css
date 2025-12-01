@@ -196,12 +196,12 @@
     cursor: not-allowed;
 }
 
-.chooseProduct, .chooseBlog{
+.chooseProduct, .chooseBlog, .chooseCoupon{
     margin: 2em 5em 2em 5em;
     display:flex;
     justify-content: space-between;
 }
-.menuProduct, .menuBlog{
+.menuProduct, .menuBlog, .menuCoupon{
     width: 20em;
     background-color: white;
     border: 1px solid whitesmoke;
@@ -746,4 +746,42 @@ select:focus {
     .invoice_order {
         flex-direction: column;
     }
+}
+.listCoupon{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+.couponTemplate{
+    background-color: white;
+    padding: 1em;
+    border-radius: 10px;
+    border: 1px solid white;
+    width: 20em;
+    height: 15em;
+    position: relative;
+}
+.couponTemplate label{
+    font-weight: 600;
+    color: black;
+}
+.couponCode span, .couponDiscount span{
+    color: red
+}
+.couponCode span{
+    font-weight: 800;
+    font-size: 18px;
+}
+.couponExpired{
+    position: absolute;
+    top: 10px;
+    right: -25px;
+    width: 100px;
+    text-align: center;
+    padding: 5px 0;
+    color: #fff;
+    font-weight: bold;
+    transform: rotate(45deg);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
 }

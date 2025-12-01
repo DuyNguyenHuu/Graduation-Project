@@ -22,7 +22,7 @@ use App\Http\Controllers\CouponController;
 */
 
     // Authentication Routes...
-    Route::get('/login', [UserController::class, 'index'])->name('login');
+    Route::get('/login', [UserController::class, 'loginPage'])->name('login');
     Route::post('/login', [UserController::class, 'login'])->name('loginProcess');
 
     // Dashboard Route...
@@ -47,6 +47,8 @@ use App\Http\Controllers\CouponController;
         Route::resource('/productReview', ProductReviewController::class);
 
         Route::resource('/coupons', CouponController::class);
+
+        Route::resource('/users', UserController::class);
 
         Route::get('/logout', [UserController::class, 'logout'])->name('logout');
     });

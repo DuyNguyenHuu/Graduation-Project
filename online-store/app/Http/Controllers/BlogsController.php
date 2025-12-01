@@ -8,16 +8,22 @@ use Illuminate\Support\Facades\DB;
 class BlogsController extends Controller
 {
     public function index(request $request){
-        $getBCategory=DB::table('bcategories')->select('*')->get();
+        $getBCategory=DB::table('bcategories')
+                        ->where('StatusBCategory', '=', '1')
+                        ->select('*')->get();
         if ($request->has('category')) {
             $getBlog = DB::table('blogs')
                         ->join('bcategories', 'blogs.CategoryBlog', '=', 'bcategories.IdBCategory')
                         ->where('blogs.CategoryBlog', $request->category)
+                        ->where('blogs.StatusBlog', '=', '1')
+                        ->where('bcategories.StatusBCategory', '=', '1')
                         ->select('*')
                         ->paginate(8);
         } else {
             $getBlog = DB::table('blogs')
                         ->join('bcategories', 'blogs.CategoryBlog', '=', 'bcategories.IdBCategory')
+                        ->where('blogs.StatusBlog', '=', '1')
+                        ->where('bcategories.StatusBCategory', '=', '1')
                         ->select('*')
                         ->paginate(8);
         }

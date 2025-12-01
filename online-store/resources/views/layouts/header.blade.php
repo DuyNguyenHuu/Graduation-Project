@@ -119,7 +119,7 @@
     </div>
     <div class="menuDetail"><a href="{{ route('home') }}">Home</a></div>
     <div class="menuDetail"><a href="{{ route('products') }}">Products</a></div>
-    <div class="menuDetail"><a href="" >Deals</a></div>
+    <div class="menuDetail"><a href="{{ route('coupons') }}" >Coupons</a></div>
     <div class="menuDetail"><a href="" >Collections</a></div>
     <div class="menuDetail"><a href="{{ route('blogs') }}" >Blogs</a></div>
     <div class="menuDetail"><a href="" >Contact</a></div>

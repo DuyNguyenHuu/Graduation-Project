@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
@@ -43,6 +44,7 @@ Route::post('/products/{idProduct}/review', [ProductsController::class, 'submitR
 Route::get('/blogs', [BlogsController::class, 'index'])->name('blogs');
 Route::get('/blogs/category={idBCategory}', [BlogsController::class, 'index']);
 Route::get('/blogs/{idBlog}', [BlogsController::class, 'detailBlog']);
+route::get('/coupons', [CouponsController::class, 'index'])->name('coupons');
 Route::get('/carts',[CartsController::class, 'index'])->name('cart.view');
 Route::post('/add-to-cart', [CartsController::class, 'addToCart'])->name('cart.add');
 Route::delete('/carts/remove/{key}', [CartsController::class, 'remove'])->name('cart.remove');

@@ -30,9 +30,9 @@
                         <td>{{ $row->Blog }}</td>
                         <td>{{ $row->BCategory }}</td>
                         @if ($row->StatusBlog==1)
-                            <td>Publish</td>
+                            <td style="color:green">Publish</td>
                         @else
-                            <td>UnPublish</td>
+                            <td style="color:red">UnPublish</td>
                         @endif
                         <td>
                             <div style="display:flex;justify-content:space-evenly">

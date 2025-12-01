@@ -58,6 +58,7 @@ class CartsController extends Controller
         }
 
         session()->put('cart', $cart);
+        session()->forget('coupon');
 
         return back()->with('success', 'Đã xoá sản phẩm khỏi giỏ hàng');
     }
@@ -70,6 +71,7 @@ class CartsController extends Controller
         }
 
         session()->put('cart', $cart);
+        session()->forget('coupon');
         return back();
     }
 
@@ -86,6 +88,7 @@ class CartsController extends Controller
         }
 
         session()->put('cart', $cart);
+        session()->forget('coupon');
         return back();
     }
 

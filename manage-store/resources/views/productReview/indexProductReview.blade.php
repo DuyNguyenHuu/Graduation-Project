@@ -29,11 +29,11 @@
                         <td>{{ $row->NameProduct }}</td>
                         <td>{{ $row->Evaluate }}</td>
                         @if ($row->Status==1)
-                            <td>Enabled</td>
+                            <td style="color:green">Enabled</td>
                         @elseif ($row->Status==0)
-                            <td>Disabled</td>
+                            <td style="color: red">Disabled</td>
                         @else
-                            <td>Pending</td>
+                            <td style="color: #3498DB">Pending</td>
                         @endif
                         <td>
                             <div style="display:flex;justify-content:space-evenly">

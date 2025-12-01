@@ -78,9 +78,9 @@
                     <td>{{ $row->EndDate }}</td>
                     <td>{{ $row->Time }}</td>
                     @if ($row->StatusCoupon == 1)
-                        <td>Enabled</td>
+                        <td style="color:green">Enabled</td>
                     @else
-                        <td>Disabled</td>
+                        <td style="color:red">Disabled</td>
                     @endif
                     <td>
                         <div style="display:flex;justify-content:space-evenly">

@@ -101,7 +101,11 @@
                         <td>{{ $row->TypeProduct }}</td>
                         <td>{{ $row->NewPrice }}</td>
                         <td>{{ $row->OldPrice }}</td>
-                        <td>{{ $row->StatusProduct }}</td>
+                        @if ( $row->StatusProduct === 'Publish')
+                            <td style="color: green">{{ $row->StatusProduct }}</td>
+                        @else
+                            <td style="color: red">{{ $row->StatusProduct }}</td>
+                        @endif
                         <td>
                             <div style="display:flex;justify-content:space-evenly">
                                 <select class="optionProduct" onchange="goToPage(this)" data-id="{{ $row->IdProduct }}">

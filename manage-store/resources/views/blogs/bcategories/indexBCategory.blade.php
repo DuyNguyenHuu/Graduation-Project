@@ -22,9 +22,9 @@
                         <td>{{ $row->IdBCategory }}</td>
                         <td>{{ $row->BCategory }}</td>
                         @if ($row->StatusBCategory==1)
-                            <td>Enabled</td>
+                            <td style="color:green">Enabled</td>
                         @else
-                            <td>Disabled</td>
+                            <td style="color:red">Disabled</td>
                         @endif
                         <td>
                             <div style="display:flex;justify-content:space-evenly">
