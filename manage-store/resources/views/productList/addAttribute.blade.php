@@ -2,10 +2,10 @@
 @section('content')
 <div class="category">
     <div class="Add">
-        <div>
+        <div class="title">
             <p>Create Category</p>
         </div>
-        <div>
+        <div class="action">
             <a href="{{ route('productList.attribute',['productList' => $productList]) }}">Back</a>
         </div>
     </div>

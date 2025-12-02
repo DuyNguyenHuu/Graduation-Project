@@ -2,19 +2,35 @@
 @section('content')
     <div class="background">
         <div class="Add">
-            <div>
+            <div class="title">
                 <p>Blog</p>
             </div>
-            <div style="display:flex; gap: 3em">
-                <form method="GET" action="">
-                    <input type="text" name="search" placeholder="Search Blog..." value="{{ $search ?? '' }}">
-                    <button type="submit">Search</button>
-                </form>
-
-                <a href="blogs/create" role="button" style="text-decoration: none">Add</a>
+            <div class="action">
+                <a href="blogs/create" style="text-decoration: none">Add</a>
             </div>
         </div>
-
+        <div>
+            <form method="GET" action="{{ url('/blogs') }}" >
+                <div class="filter">
+                    <div>
+                        <label>Search</label><br>
+                        <input type="text"
+                        name="search"
+                        value="{{ request('search') }}"
+                        placeholder="Search Title">
+                    </div>
+                    <div>
+                        <label>Status</label><br>
+                        <select name="status">
+                            <option value="">All Status</option>
+                            <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>Publish</option>
+                            <option value="0" {{ request('status') === '0' ? 'selected' : '' }}>UnPublish</option>
+                        </select>
+                    </div>
+                    <button type="submit">Filter</button>
+                </div>
+            </form>
+        </div>
         <div class="Table">
             <table>
                 <tr>

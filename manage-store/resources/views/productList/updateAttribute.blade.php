@@ -2,10 +2,10 @@
 @section('content')
 <div class="background">
     <div class="Add">
-        <div>
+        <div class="title">
             <p>Update Option</p>
         </div>
-        <div>
+        <div class="action">
             <a href="/productList/{{$productList}}/attributes" role="button" style="text-decoration: none">Back</a>
         </div>
     </div>

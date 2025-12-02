@@ -2,10 +2,10 @@
 @section('content')
 <div class="category">
     <div class="Add">
-        <div>
+        <div class="title">
             <p>Create Category Blog</p>
         </div>
-        <div>
+        <div class="action">
             <a href="{{ url('bcategories') }}" role="button" style="text-decoration: none">Back</a>
         </div>
     </div>

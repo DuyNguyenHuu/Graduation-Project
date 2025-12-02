@@ -20,8 +20,14 @@ class ProductReviewController extends Controller
                 ->orWhere('products.NameProduct', 'like', "%{$keyword}%");
             });
         }
+        if ($request->filled('evaluate')) {
+            $query->where('reviews.Evaluate', '=', $request->evaluate);
+        }
+            if ($request->filled('status')) {
+            $query->where('reviews.Status', '=', $request->status);
+        }
         $productReview = $query->paginate(10);
-        $productReview->appends(['search' => $request->search]);
+        $productReview->appends($request->all());
         return view('productReview.indexProductReview', compact('productReview'));
     }
 
@@ -40,12 +46,12 @@ class ProductReviewController extends Controller
                         ->update([
                             'Status'=>$request->input('statusProductReview')
                         ]);
-        return redirect('/productReview');
+        return redirect('/productReviews');
     }
     public function destroy($IdReview)
     {
         DB::table('reviews')->where('IdReview', $IdReview)->delete();
 
-        return redirect('/productReview')->with('success', 'Review has been deleted.');
+        return redirect('/productReviews')->with('success', 'Review has been deleted.');
     }
 }

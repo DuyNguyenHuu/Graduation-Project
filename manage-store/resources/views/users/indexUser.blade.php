@@ -2,7 +2,7 @@
 @section('content')
     <div class="background">
         <div class="Add">
-            <div>
+            <div class="title">
                 <p>User</p>
             </div>
             <div>

@@ -31,7 +31,7 @@ class AccountsController extends Controller
         $email = $request->input('loginEmail');
         $password = $request->input('loginPassword');
 
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+        if (Auth::attempt(['email' => $email, 'password' => $password]) && Auth::user()->Status == 1) {
             // Tạo lại session để tránh session fixation
             $request->session()->regenerate();
             session()->forget('cart');

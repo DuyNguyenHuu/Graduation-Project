@@ -9,23 +9,37 @@ use Mews\Purifier\Facades\Purifier;
 
 class BlogController extends Controller
 {
-    public function index(Request $request)
-    {
-        $search = $request->input('search');
-
-        $getBlog = DB::table('blogs')
+    public function index(Request $request){
+        $query = DB::table('blogs')
             ->join('bcategories', 'blogs.CategoryBlog', '=', 'bcategories.IdBCategory')
             ->select('blogs.*', 'bcategories.BCategory')
-            ->when($search, function ($query, $search) {
-                return $query->where('blogs.Blog', 'like', '%' . $search . '%')
-                            ->orWhere('bcategories.BCategory', 'like', '%' . $search . '%');
-            })
-            ->orderBy('blogs.IdBlog', 'DESC')
-            ->paginate(10)
-            ->appends(['search' => $search]);
+            ->orderByDesc('blogs.IdBlog');
 
-        return view('blogs.blogs.indexBlog', compact('getBlog', 'search'));
+        // ---- SEARCH ----
+        if ($request->filled('search')) {
+            $keyword = $request->search;
+
+            $query->where(function ($q) use ($keyword) {
+                $q->where('blogs.Blog', 'like', "%{$keyword}%")
+                ->orWhere('bcategories.BCategory', 'like', "%{$keyword}%");
+            });
+        }
+
+        // ---- FILTER STATUS ----
+        if ($request->filled('status')) {
+            $query->where('blogs.StatusBlog', '=', $request->status);
+        }
+
+        // ---- PAGINATION + KEEP FILTER ----
+        $getBlog = $query->paginate(10);
+        $getBlog->appends($request->all());
+
+        return view('blogs.blogs.indexBlog', [
+            'getBlog' => $getBlog,
+            'search'  => $request->search
+        ]);
     }
+
 
     public function create(){
         $getCategoryBlog=DB::table('bcategories')->select('*')->get();

@@ -2,10 +2,10 @@
 @section('content')
 <div class="background">
     <div class="Add">
-        <div>
+        <div class="title">
             <p>Coupon</p>
         </div>
-        <div>
+        <div class="action">
             <a href="{{ url('coupons') }}" role="button" style="text-decoration: none">Back</a>
         </div>
     </div>

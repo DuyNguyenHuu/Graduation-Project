@@ -2,16 +2,16 @@
 @section('content')
 <div class="background">
     <div class="Add">
-        <div>
+        <div class="title">
             <p>Detail Review Product</p>
         </div>
-        <div>
-            <a href="{{ url('productReview') }}" role="button" style="text-decoration: none">Back</a>
+        <div class="action">
+            <a href="{{ url('productReviews') }}" role="button" style="text-decoration: none">Back</a>
         </div>
     </div>
     <div class="formUpdate">
         @foreach ($detailProductReview as $row)
-            <form method="POST" action=" /productReview/{{ $row->IdReview }}">
+            <form method="POST" action=" /productReviews/{{ $row->IdReview }}">
                 @csrf
                 @method("PUT")
                 <label>Name:</label><br>

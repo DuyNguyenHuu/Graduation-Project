@@ -41,7 +41,7 @@ class UserController extends Controller
         $email = $request->input('emailLogin');
         $password = $request->input('passwordLogin');
 
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+        if (Auth::attempt(['email' => $email, 'password' => $password]) && Auth::user()->Status == 1 && Auth::user()->ROLE == 1) {
             $request->session()->regenerate();
 
             $user = Auth::user();

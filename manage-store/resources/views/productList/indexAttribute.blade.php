@@ -2,12 +2,12 @@
 @section('content')
     <div class="background">
         <div class="Add">
-            <div>
+            <div class="title">
                 <p>Category</p>
             </div>
-            <div>
-                <a href="/productList/{{$productList}}/attributes/create" role="button" style="text-decoration: none">Add</a>
-                <a href="/productList" role="button" style="text-decoration: none">Back</a>
+            <div style="display: flex">
+                <div><a href="/productList/{{$productList}}/attributes/create" style="text-decoration: none">Add</a></div>
+                <div><a href="/productList" style="text-decoration: none">Back</a></div>
             </div>
         </div>
         <div class="Table">

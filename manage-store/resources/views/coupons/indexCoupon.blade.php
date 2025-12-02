@@ -2,10 +2,10 @@
 @section('content')
     <div class="background">
         <div class="Add">
-            <div>
+            <div class="title">
                 <p>Coupon</p>
             </div>
-            <div>
+            <div class="action">
                 <a href="coupons/create" role="button" style="text-decoration: none">Add</a>
             </div>
         </div>
@@ -44,7 +44,7 @@
                         <select name="status">
                             <option value="">All Status</option>
                             <option value="1" {{ request('status') == 1 ? 'selected' : '' }}>Enabled</option>
-                            <option value="2" {{ request('status') == 2 ? 'selected' : '' }}>Disabled</option>
+                            <option value="0" {{ request('status') == 0 ? 'selected' : '' }}>Disabled</option>
                         </select>
                     </div>
                     <button type="submit">Filter</button>

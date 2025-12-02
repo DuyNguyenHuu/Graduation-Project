@@ -2,10 +2,10 @@
 @section('content')
 <div class="background">
     <div class="Add">
-        <div>
+        <div class="title">
             <p>Product</p>
         </div>
-        <div>
+        <div class="action">
             <a href="productList/create" role="button" style="text-decoration: none">Add</a>
         </div>
     </div>

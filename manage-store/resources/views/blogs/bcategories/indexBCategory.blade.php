@@ -2,10 +2,10 @@
 @section('content')
     <div class="background">
         <div class="Add">
-            <div>
+            <div class="title">
                 <p>Category Blog</p>
             </div>
-            <div>
+            <div class="action">
                 <a href="bcategories/create" role="button" style="text-decoration: none">Add</a>
             </div>
         </div>

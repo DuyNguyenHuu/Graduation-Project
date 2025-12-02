@@ -39,7 +39,23 @@
     justify-content:space-around;
     background-color: white;
     margin-bottom: 5%;
-    
+}
+.title{
+    color: #3498DB;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 1% 1% 1% 1%;
+}
+.action{
+    background-color: #3498DB;
+    border-radius: 10px;
+    border: 0.5px solid white;
+    padding: 1% 1% 1% 1%;
+    margin: 1% 1% 1% 1%;
+    text-align: center;
+}
+.action a{
+    color: white;
 }
 .Table{
     width: 100%;
