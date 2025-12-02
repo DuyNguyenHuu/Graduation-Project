@@ -130,7 +130,7 @@
                 {!! $DetailProduct->Description !!}
             </div>
             <div id="shipping" class="tab-content">
-                456
+                {!! $getShipping->Detail !!}
             </div>
             <script>
                 function showTab(tabId) {

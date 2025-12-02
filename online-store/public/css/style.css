@@ -15,7 +15,32 @@
     margin:0.5em 0 0 6em;
 }
 
-
+#toastsuccess{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #4caf50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+#toastfail{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #e74c3c;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity .5s ease;
+}
 .register{
     border: 1px solid black;
     border-radius: 10px;
@@ -784,4 +809,72 @@ select:focus {
     font-weight: bold;
     transform: rotate(45deg);
     box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.contact {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+.contact-info{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.contact-info, .contact-message {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 1;
+    min-width: 280px;
+}
+
+.contact-info h3,
+.contact-message h3 {
+    margin-bottom: 10px;
+}
+
+.contact-info hr,
+.contact-message hr {
+    margin: 10px 0;
+}
+
+.contact-info p {
+    margin: 6px 0;
+}
+
+.contact-message form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-message input,
+.contact-message textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0 6px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.contact-message button {
+    padding: 12px 20px;
+    background-color: #3F5D45 ;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.contact-message button:hover {
+    background-color: black ;
+}
+@media (max-width: 768px) {
+    .contact {
+        flex-direction: column;     /* Xếp dọc */
+    }
 }

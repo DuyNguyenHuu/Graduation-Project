@@ -7,29 +7,29 @@
             <p>Email: duyyl8a22016@gmail.com</p>
         </div>
         <div>
-            <p>Monday-Friday: 9:00AM - 10PM</p>
-            <p>Saturday: 9:AM - 4PM</p>
+            <p>Monday-Friday: 7:00 AM - 5:30 PM</p>
+            <p>Saturday: 7:AM - 11:30 AM</p>
         </div>
         <div>
-            <a href="" target="_blank">
+            <a href="https://facebook.com" target="_blank">
                 <i class="fa-brands fa-facebook"></i>
             </a>
-            <a href="" target="_blank">
+            <a href="https://x.com" target="_blank">
                 <i class="fa-brands fa-twitter"></i>
             </a>
-            <a href="" target="_blank">
+            <a href="https://youtube.com" target="_blank">
                 <i class="fa-brands fa-youtube"></i>
             </a>
-            <a href="" target="_blank">
+            <a href="https://linkedin.com" target="_blank">
                 <i class="fa-brands fa-linkedin"></i>
             </a>
-            <a href="" target="_blank">
+            <a href="https://instagram.com" target="_blank">
                 <i class="fa-brands fa-instagram"></i>
             </a>
-            <a href="" target="_blank">
+            <a href="https://pinterest.com" target="_blank">
                 <i class="fa-brands fa-pinterest"></i>
             </a>
-            <a href="" target="_blank">
+            <a href="https://tiktok.com" target="_blank">
                 <i class="fa-brands fa-tiktok"></i>
             </a>
         </div>

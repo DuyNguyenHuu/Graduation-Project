@@ -82,7 +82,8 @@ class ProductsController extends Controller
             2 => $reviewProduct->where('Evaluate', 2)->count(),
             1 => $reviewProduct->where('Evaluate', 1)->count()
         ];
-        return view('content.detailProduct', compact('DetailProduct', 'getSubCategory', 'getCategory', 'optionProduct', 'reviewProduct', 'avgRating', 'starCount'));
+        $getShipping = DB::table('generalinfo')->where('id', 1)->first();
+        return view('content.detailProduct', compact('DetailProduct', 'getSubCategory', 'getCategory', 'optionProduct', 'reviewProduct', 'avgRating', 'starCount', 'getShipping'));
     }
 
     public function submitReview(Request $request, $idProduct){

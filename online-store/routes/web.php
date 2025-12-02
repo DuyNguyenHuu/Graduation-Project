@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\CartsController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ContactsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,8 @@ Route::get('/blogs', [BlogsController::class, 'index'])->name('blogs');
 Route::get('/blogs/category={idBCategory}', [BlogsController::class, 'index']);
 Route::get('/blogs/{idBlog}', [BlogsController::class, 'detailBlog']);
 route::get('/coupons', [CouponsController::class, 'index'])->name('coupons');
+Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts.form');
+Route::post('/contacts', [ContactsController::class, 'sendMessage'])->name('contacts.process');
 Route::get('/carts',[CartsController::class, 'index'])->name('cart.view');
 Route::post('/add-to-cart', [CartsController::class, 'addToCart'])->name('cart.add');
 Route::delete('/carts/remove/{key}', [CartsController::class, 'remove'])->name('cart.remove');
