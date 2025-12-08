@@ -10,7 +10,7 @@ use App\Http\Controllers\BCategoryController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\CouponController;
-use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\ShippingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,9 +46,9 @@ use App\Http\Controllers\CollectionController;
         Route::delete('/productList/{productList}/attributes/{idOption}',[ProductListController::class,'destroyAttribute'])->name('productList.destroyAttribute');
 
         Route::resource('/productReviews', ProductReviewController::class);
-        Route::resource('/collections', CollectionController::class);
 
         Route::resource('/coupons', CouponController::class);
+        Route::resource('shippings', ShippingController::class);
 
         Route::resource('/users', UserController::class);
 

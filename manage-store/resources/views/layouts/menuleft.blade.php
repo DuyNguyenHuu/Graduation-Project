@@ -33,9 +33,6 @@
                             <li>
                                 <a href="{{ url('productReviews') }}" class="nav-link px-0"> <span class="d-none d-sm-inline">Product Review</span></a>
                             </li>
-                            <li>
-                                <a href="{{ url('collections') }}" class="nav-link px-0"> <span class="d-none d-sm-inline">Collection</span></a>
-                            </li>
                         </ul>
                     </li>
                     <li>
@@ -77,6 +74,9 @@
                             </li>
                             <li>
                                 <a href="" class="nav-link px-0"> <span class="d-none d-sm-inline">Banner</span></a>
+                            </li>
+                            <li>
+                                <a href="{{ url('shippings') }}" class="nav-link px-0"> <span class="d-none d-sm-inline">Shipping Info</span></a>
                             </li>
                         </ul>
                     </li>

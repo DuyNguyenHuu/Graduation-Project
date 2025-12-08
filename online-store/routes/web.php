@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\CartsController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\VNPayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,3 +59,7 @@ Route::post('/carts/apply-coupon', [CartsController::class, 'applyCoupon'])->nam
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.form')->middleware('auth');
 Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.process')->middleware('auth');
 Route::get('/checkout/invoice', [CheckoutController::class, 'invoice'])->name('checkout.invoice')->middleware('auth');
+
+Route::get('/payment/create', [VNPayController::class, 'createPayment'])->middleware('auth');
+Route::get('/payment/return', [VNPayController::class, 'returnPayment'])->middleware('auth');
+Route::get('/result', [VNPayController::class, 'result'])->middleware('auth');

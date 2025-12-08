@@ -34,7 +34,9 @@
                 @endif
             </div>
         </div>
-        <button>Payment</button>
+        <a href="/payment/create">
+            <button>Payment</button>
+        </a>
     </div>
 
 @endsection
