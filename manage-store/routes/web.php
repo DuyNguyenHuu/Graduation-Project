@@ -11,6 +11,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\ShippingController;
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,6 +52,7 @@ use App\Http\Controllers\ShippingController;
         Route::resource('shippings', ShippingController::class);
 
         Route::resource('/users', UserController::class);
+        Route::resource('/orders', OrderController::class);
 
         Route::get('/logout', [UserController::class, 'logout'])->name('logout');
     });

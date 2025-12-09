@@ -13,6 +13,7 @@ use App\Http\Controllers\CartsController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\VNPayController;
+use App\Http\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +64,6 @@ Route::get('/checkout/invoice', [CheckoutController::class, 'invoice'])->name('c
 Route::get('/payment/create', [VNPayController::class, 'createPayment'])->middleware('auth');
 Route::get('/payment/return', [VNPayController::class, 'returnPayment'])->middleware('auth');
 Route::get('/result', [VNPayController::class, 'result'])->middleware('auth');
+
+Route::get('/orders', [OrdersController::class, 'index'])->middleware('auth');
+Route::get('/orders/{idOrder}', [OrdersController::class, 'detailOrder'])->middleware('auth');

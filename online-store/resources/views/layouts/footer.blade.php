@@ -1,4 +1,4 @@
-<div style="display:flex; justify-content: space-evenly; background-color: white;padding: 2em;">
+<div style="display:flex; justify-content: space-evenly; background-color: white;padding: 2em; margin-top: 1em;">
     <div style="width: 25em">
         <h5>Get In Touch</h5>
         <div>
