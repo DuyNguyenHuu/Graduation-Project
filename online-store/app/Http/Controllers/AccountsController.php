@@ -72,7 +72,7 @@ class AccountsController extends Controller
         $user->Phone = $request->input('registerPhone');
 
         // Mã hóa mật khẩu bằng cách sử dụng Hash::make
-        $user->Password = Hash::make($request->input('registerPassword'));
+        $user->password = Hash::make($request->input('registerPassword'));
 
         $user->ROLE = 0;
         $user->save();
@@ -87,5 +87,40 @@ class AccountsController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/')->with('success', 'Bạn đã đăng xuất thành công!');
+    }
+
+    public function changePasswordForm(){
+        return view('content.authentication.changepassword');
+    }
+
+    public function changePassword(Request $request){
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'new_password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/[a-z]/',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*?&]/',
+                'confirmed',
+            ],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if (!Hash::check($request->input('old_password'), $user->password)) {
+            return redirect()->back()->withErrors(['old_password' => 'Current password is incorrect!'])->withInput();
+        }
+
+        $user->password = Hash::make($request->input('new_password'));
+        $user->save();
+
+        return redirect()->route('login')->with('success', 'Password changed successfully!');
     }
 }

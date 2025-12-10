@@ -637,6 +637,24 @@ select:focus {
     border-color: #2c4431;
     box-shadow: 0 0 5px rgba(63,93,69,0.4);
 }
+.deliInfo input[type="password"],
+select{
+    width: 100%;
+        padding: 8px;
+        margin: 6px 0 10px 0;
+        border: 2px solid #3F5D45;
+        border-radius: 8px;
+        font-size: 14px;
+        background: #fff;
+        color: #3F5D45;
+        outline: none;
+        transition: 0.2s;
+}
+.deliInfo input[type="password"]:focus,
+select:focus {
+    border-color: #2c4431;
+    box-shadow: 0 0 5px rgba(63,93,69,0.4);
+}
 .deliInfo button {
     width: 100%;
     padding: 12px;

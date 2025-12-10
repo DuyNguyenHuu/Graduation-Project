@@ -31,6 +31,9 @@ Route::post('/login', [AccountsController::class, 'login'])->name('login');
 Route::post('/register', [AccountsController::class, 'register'])->name('register');
 Route::get('/logout', [AccountsController::class, 'logout'])->middleware('auth')->name('logout');
 
+Route::get('/change-password', [AccountsController::class, 'changePasswordForm'])->middleware('auth')->name('password.change.form');
+Route::post('/change-password', [AccountsController::class, 'changePassword'])->middleware('auth')->name('password.change.process');
+
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 

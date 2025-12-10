@@ -15,7 +15,7 @@
                     style="background-color: #ffffff; color: #000000; border-radius: 10px; min-width: 200px;">
                     <li><h6 class="dropdown-header text-dark">{{ Auth::user()->email }}</h6></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-dark" href="{{ url('/profile') }}">Personal Information</a></li>
+                    <li><a class="dropdown-item text-dark" href="{{ url('/change-password') }}">Change Password</a></li>
                     <li>
                         <form method="GET" action="{{ route('logout') }}">
                             @csrf
@@ -31,7 +31,7 @@
     </div>
     <div class="header">
         <div class="logo">
-            <a href="" target="_blank">
+            <a href="/">
                 <img style="height: 4em" src="https://phuongnamvina.com/img_data/images/design-logo-ban-hang-online.jpg">
             </a>
         </div>
