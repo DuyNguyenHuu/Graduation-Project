@@ -34,6 +34,12 @@
                         <option value="Publish">Publish</option>
                         <option value="UnPublish">UnPublish</option>
                     </select><br>
+                    <label>Tags:</label><br>
+                    <div class="tag-input-container">
+                        <ul id="tagList"></ul>
+                        <input type="text" id="tagInput" placeholder="Enter Tags">
+                    </div>
+                    <input type="hidden" name="tags" id="tagsHidden">
                     <label>Description:</label><br>
                     <textarea name="descriptionProduct" id="editor"></textarea>
                 </div>
@@ -104,6 +110,48 @@
 
             subcategorySelect.value = ""; // Reset selection
         }
+        </script>
+        <script>
+            const tagInput = document.getElementById('tagInput');
+            const tagList = document.getElementById('tagList');
+            const tagsHidden = document.getElementById('tagsHidden');
+
+            let tags = [];
+
+            tagInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+
+                    const value = tagInput.value.trim();
+                    if (value === '' || tags.includes(value)) return;
+
+                    addTag(value);
+                    tagInput.value = '';
+                }
+            });
+
+            function addTag(text) {
+                tags.push(text);
+                renderTags();
+            }
+
+            function removeTag(index) {
+                tags.splice(index, 1);
+                renderTags();
+            }
+
+            function renderTags() {
+                tagList.innerHTML = '';
+
+                tags.forEach((tag, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'tag';
+                    li.innerHTML = `${tag} <span onclick="removeTag(${index})">&times;</span>`;
+                    tagList.appendChild(li);
+                });
+
+                tagsHidden.value = tags.join(',');
+            }
         </script>
     </div>
 </div>

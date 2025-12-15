@@ -68,6 +68,7 @@ class ProductListController extends Controller
         $product->NewPrice=$request->input('newPriceProduct');
         $product->OldPrice=$request->input('oldPriceProduct');
         $product->StatusProduct=$request->input('statusProduct');
+        $product->Tag=$request->tags;
         $product->ImageURL=$request->input('imageURLProduct');
         $product->Category=$request->input('categoryProduct');
         $product->SubCategory=$request->input('subCategoryProduct');
@@ -154,6 +155,7 @@ class ProductListController extends Controller
                             'OldPrice'=>$request->input('oldPriceProduct'),
                             'StatusProduct'=>$request->input('statusProduct'),
                             'ImageURL'=>$request->input('imageURLProduct'),
+                            'Tag'=>$request->input('tags'),
                             'Category'=>$request->input('categoryProduct'),
                             'SubCategory'=>$request->input('subCategoryProduct'),
                             'Description'=>$cleanHtml

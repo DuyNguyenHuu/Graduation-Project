@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 use function Laravel\Prompts\select;
 
@@ -83,7 +84,21 @@ class ProductsController extends Controller
             1 => $reviewProduct->where('Evaluate', 1)->count()
         ];
         $getShipping = DB::table('generalinfo')->where('id', 1)->first();
-        return view('content.detailProduct', compact('DetailProduct', 'getSubCategory', 'getCategory', 'optionProduct', 'reviewProduct', 'avgRating', 'starCount', 'getShipping'));
+        $recommendedProducts = [];
+        try{
+            $response = http::timeout(3)->get(env('RECOMMENDER_API').'/recommend/'.$IdProduct);
+            if ($response->successful()) {
+            $recommendedProducts = collect(
+                $response->json()['recommendations']
+            )->map(function ($item) {
+                return (object) $item;
+            });
+        }
+            
+        }catch(\Exception $e){
+            $recommendedProducts = [];
+        }
+        return view('content.detailProduct', compact('DetailProduct', 'getSubCategory', 'getCategory', 'optionProduct', 'reviewProduct', 'avgRating', 'starCount', 'getShipping', 'recommendedProducts'));
     }
 
     public function submitReview(Request $request, $idProduct){

@@ -42,21 +42,6 @@
                     {!! $shortDesc !!}
                     <a href="#description" style="color:#3F5D45; text-decoration: none;">Read more</a>
                 </div>
-                <div class="categoryProduct">
-                    @if ($DetailProduct->SubCategory==null)
-                        @foreach ($getCategory as $row)
-                            @if ($row->IdCategory == $DetailProduct->Category)
-                                Category: <a href="" style="text-decoration: none; color: #3F5D45">{{ $row->NameCategory }}</a>
-                            @endif
-                        @endforeach
-                    @else
-                        @foreach ($getSubCategory as $row)
-                            @if ($row->IdSub == $DetailProduct->SubCategory && $row->IdSubCategory == $DetailProduct->Category)
-                                Category: <a href="" style="text-decoration: none; color: #3F5D45">{{ $row->NameCategory }} / {{ $row->Name }}</a>
-                            @endif
-                        @endforeach
-                    @endif
-                </div>
                 <form style="margin-bottom: 2em" method="POST" action="{{ route('cart.add') }}">
                     @csrf
                     @if ($optionProduct != null)
@@ -119,6 +104,22 @@
                         Compare
                     </button>
                 </form>
+                <div class="categoryProduct">
+                    @if ($DetailProduct->SubCategory==null)
+                        @foreach ($getCategory as $row)
+                            @if ($row->IdCategory == $DetailProduct->Category)
+                                Category: <a href="" style="text-decoration: none; color: #3F5D45">{{ $row->NameCategory }}</a><br>
+                            @endif
+                        @endforeach
+                    @else
+                        @foreach ($getSubCategory as $row)
+                            @if ($row->IdSub == $DetailProduct->SubCategory && $row->IdSubCategory == $DetailProduct->Category)
+                                Category: <a href="" style="text-decoration: none; color: #3F5D45">{{ $row->NameCategory }} / {{ $row->Name }}</a><br>
+                            @endif
+                        @endforeach
+                    @endif
+                    Tags: {{ $DetailProduct->Tag }}
+                </div>
             </div>
         </div>
         <div class="description">
@@ -283,5 +284,59 @@
                     <hr>
             </div>
         </div>
+        <div class="product-container" style="background-color: white;padding: 1em; border-radius: 10px; margin-top: 2em;">
+            <button class="arrow arrow-left" id="leftArrow" onclick="scrollProducts(-1)" disabled>&#8592;</button>
+            <h4>Recommended Products</h4>
+            <div class="product-list">
+                @forelse ($recommendedProducts as $row)
+                    <div class="product-item">
+                        @include('components.product_box', ['product' => $row])
+                    </div>
+                @empty
+                    <p>Không có sản phẩm nào trong danh mục này.</p>
+                @endforelse
+            </div>
+            <button class="arrow arrow-right" id="rightArrow" onclick="scrollProducts(1)">&#8594;</button>
+        </div>
+        <script>
+            const productList = document.querySelector('.product-list');
+            const leftArrow = document.getElementById('leftArrow');
+            const rightArrow = document.getElementById('rightArrow');
+            const productWidth = document.querySelector('.product-item').offsetWidth + 20; // Chiều rộng mỗi sản phẩm + khoảng cách
+            let currentTransform = 0; // Biến lưu vị trí hiện tại
+
+            // Hàm cuộn sản phẩm
+            function scrollProducts(direction) {
+                const maxScrollWidth = productList.scrollWidth - productList.clientWidth; // Đo chiều dài danh sách sản phẩm trừ đi chiều rộng vùng hiển thị
+                currentTransform += direction * productWidth;
+
+                // Giới hạn cuộn
+                if (currentTransform < 0) {
+                    currentTransform = 0; // Không cuộn qua trái quá
+                } else if (currentTransform > maxScrollWidth) {
+                    currentTransform = maxScrollWidth; // Không cuộn qua phải quá
+                }
+
+                // Áp dụng biến hiện tại vào transform
+                productList.style.transform = `translateX(-${currentTransform}px)`;
+
+                // Cập nhật trạng thái các mũi tên
+                updateArrowState(currentTransform, maxScrollWidth);
+            }
+
+            // Hàm cập nhật trạng thái mũi tên
+            function updateArrowState(currentTransform, maxScrollWidth) {
+                // Nếu cuộn đến đầu, vô hiệu hóa mũi tên trái
+                leftArrow.disabled = currentTransform === 0;
+                leftArrow.classList.toggle('disabled', currentTransform === 0);
+
+                // Nếu cuộn đến cuối, vô hiệu hóa mũi tên phải
+                rightArrow.disabled = currentTransform === maxScrollWidth;
+                rightArrow.classList.toggle('disabled', currentTransform === maxScrollWidth);
+            }
+
+            // Gọi hàm để kiểm tra trạng thái ban đầu khi trang tải
+            updateArrowState(currentTransform, productList.scrollWidth - productList.clientWidth);
+        </script>
     </div>
 @endsection

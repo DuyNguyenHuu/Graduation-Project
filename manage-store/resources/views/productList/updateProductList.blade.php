@@ -36,6 +36,12 @@
                             <option value="Publish"{{ $productDescription->StatusProduct == 'Publish' ? 'selected' : '' }}>Publish</option>
                             <option value="UnPublish"{{ $productDescription->StatusProduct == 'UnPublish' ? 'selected' : '' }}>UnPublish</option>
                         </select><br>
+                        <label>Tags:</label><br>
+                        <div class="tag-input-container">
+                            <ul id="tagList"></ul>
+                            <input type="text" id="tagInput" placeholder="Enter tag and press Enter">
+                        </div>
+                        <input type="hidden" name="tags" id="tagsHidden">
                         <label>Description:</label><br>
                         <textarea name="descriptionProduct" id="editor">{!! $productDescription->Description !!}</textarea>
                     </div>
@@ -112,6 +118,49 @@
 
                 subcategorySelect.value = ""; // Reset selection
             }
+            </script>
+            <script>
+                const tagInput = document.getElementById('tagInput');
+                const tagList = document.getElementById('tagList');
+                const tagsHidden = document.getElementById('tagsHidden');
+
+                let tags = "{{ $productDescription->Tag ?? '' }}"
+                    .split(',')
+                    .map(tag => tag.trim())
+                    .filter(tag => tag !== '');
+
+                renderTags();
+
+                tagInput.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+
+                        const value = tagInput.value.trim();
+                        if (!value || tags.includes(value)) return;
+
+                        tags.push(value);
+                        tagInput.value = '';
+                        renderTags();
+                    }
+                });
+
+                function removeTag(index) {
+                    tags.splice(index, 1);
+                    renderTags();
+                }
+
+                function renderTags() {
+                    tagList.innerHTML = '';
+
+                    tags.forEach((tag, index) => {
+                        const li = document.createElement('li');
+                        li.className = 'tag';
+                        li.innerHTML = `${tag} <span onclick="removeTag(${index})">&times;</span>`;
+                        tagList.appendChild(li);
+                    });
+
+                    tagsHidden.value = tags.join(',');
+                }
             </script>
         </div>
     </div>

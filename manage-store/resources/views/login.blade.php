@@ -27,7 +27,6 @@
             @csrf
             <input type="email" name="emailLogin" class="accountAdmin" placeholder="Enter Email" required><br>
             <input type="password" name="passwordLogin" class="accountAdmin"placeholder="Enter Password" required><br>
-            <a href="">Forgot Password?</a><br>
             <button type="submit">Sign in</button>
         </form>
     </div>

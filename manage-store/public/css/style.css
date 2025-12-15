@@ -1,12 +1,6 @@
 .d-sm-inline{
-    margin-left: 15px;
+    margin-left: 30px;
     color:gray;
-}
-.px-sm-2 {
-    background-color: white !important;
-}
-.mb-md-0{
-    color:Gray !important;
 }
 
 .loginAdmin{
@@ -38,7 +32,7 @@
     display:flex;
     justify-content:space-around;
     background-color: white;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 }
 .title{
     color: #3498DB;
@@ -114,6 +108,7 @@
     border: 1px solid whitesmoke;
     border-radius: 10px;
     margin-right: 2em;
+    width: 80%;
 }
 .productInfo2{
     display:flex;
@@ -166,4 +161,45 @@
     z-index: 9999;
     opacity: 0;
     transition: opacity .5s ease;
+}
+
+.tag-input-container {
+    border: 1px solid #ccc;
+    padding: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    border-radius: 6px;
+}
+
+#tagList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tag {
+    background-color: #3F5D45;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.tag span {
+    margin-left: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#tagInput {
+    border: none;
+    outline: none;
+    flex: 1;
+    min-width: 120px;
 }
