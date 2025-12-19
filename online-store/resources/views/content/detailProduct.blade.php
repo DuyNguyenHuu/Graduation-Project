@@ -293,7 +293,7 @@
                         @include('components.product_box', ['product' => $row])
                     </div>
                 @empty
-                    <p>Không có sản phẩm nào trong danh mục này.</p>
+                    <p>No products were recommended.</p>
                 @endforelse
             </div>
             <button class="arrow arrow-right" id="rightArrow" onclick="scrollProducts(1)">&#8594;</button>

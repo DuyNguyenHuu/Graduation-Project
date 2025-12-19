@@ -8,7 +8,7 @@
             </div>
             <div style="display: flex;justify-content: space-around">
                 <a href="/orders"><button>Your Order</button></a>
-                <a href="/home"><button>Home</button></a>
+                <a href="/"><button>Home</button></a>
             </div>
         </div>
     @else

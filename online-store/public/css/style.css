@@ -120,16 +120,18 @@
 }
 
 .popularCategory{
-    padding: 4em 5em 2em 5em;
-    background-color: white;
+    background-color: whitesmoke;
     margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
 }
 .productCategory :hover{
     color:#3F5D45;
     cursor: pointer;
 }
 .productTemplate{
-    border:1px solid #ccc; 
+    border:1px solid #ccc;
     padding:10px; 
     width:180px; 
     height: 350px;
@@ -182,9 +184,12 @@
 
 .product-container {
         margin-top: 20px;
-        overflow: hidden; /* Ẩn phần thừa */
+        overflow: hidden;
         position: relative;
-        width: 100%; /* Điều chỉnh chiều rộng nếu cần */
+        width: 100%;
+        background-color: white;
+        padding: 1em;
+        border-radius: 10px;
     }
 .product-list {
     display: flex;

@@ -47,6 +47,7 @@ Route::get('/search-product', [ProductsController::class, 'searchAjax'])->name('
 Route::get('/products', [ProductsController::class, 'index'])->name('products');
 Route::get('/products/{idProduct}', [ProductsController::class, 'detailProduct']);
 Route::post('/products/{idProduct}/review', [ProductsController::class, 'submitReview'])->middleware('auth')->name('submitReview');
+Route::get('/reviews/filter/{productId}', [ProductsController::class, 'detailProduct']);
 Route::get('/blogs', [BlogsController::class, 'index'])->name('blogs');
 Route::get('/blogs/category={idBCategory}', [BlogsController::class, 'index']);
 Route::get('/blogs/{idBlog}', [BlogsController::class, 'detailBlog']);

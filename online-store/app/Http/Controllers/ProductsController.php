@@ -12,9 +12,11 @@ class ProductsController extends Controller
 {
     public function index(Request $request){
         $getCategory=DB::table('categories')
+                    ->where('Status', '=', '1')
                     ->select('*')
                     ->get();
         $getSubCategory=DB::table('subcategories')
+                    ->where('StatusSub', '=', '1')
                     ->select('*')
                     ->get();
         $filters = $request->input('filter',[]);
@@ -35,10 +37,11 @@ class ProductsController extends Controller
                     $getFilterProduct=$getFilterProduct->union($filterProduct);
                 }
             }
-            $getProduct=$getFilterProduct->paginate(10)->appends($request->all());
+            $getProduct=$getFilterProduct->orderBy('created_at', 'desc')
+                        ->paginate(10)->appends($request->all());
         }
         else{
-            $getProduct=DB::table('products')->where('StatusProduct', '=', 'Publish')
+            $getProduct=DB::table('products')->where('StatusProduct', '=', 'Publish')->orderBy('created_at', 'desc')
                             ->select('*')->paginate(10)->appends($request->all());
         }
         return view('content.products',compact('getCategory','getProduct', 'getSubCategory'));
@@ -109,7 +112,7 @@ class ProductsController extends Controller
             'Evaluate' => $request->input('evaluate'),
             'Comments' => $request->input('comment'),
             'created_at' => now(),
-            'status' => 2
+            'status' => 1
         ]);
 
         return redirect()->back()->with('success', 'Your review has been submitted! Please wait for admin approval.');

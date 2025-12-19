@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderStatusUpdated;
 
 class OrderController extends Controller
 {
@@ -48,6 +50,12 @@ class OrderController extends Controller
             'status' => $request->status,
             'updated_at' => now()
         ]);
+        $order = DB::table('orders')
+                    ->where('orders.id', $idOrder)
+                    ->join('users', 'orders.user_id', '=', 'users.IdUser')
+                    ->select('orders.*', 'users.Name as Name', 'users.email as Email')
+                    ->first();
+        Mail::to($order->Email)->send(new OrderStatusUpdated($order));
         return redirect()->route('orders.index')->with('success', 'Order status updated successfully.');
     }
 }

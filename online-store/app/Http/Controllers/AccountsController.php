@@ -74,7 +74,7 @@ class AccountsController extends Controller
         // Mã hóa mật khẩu bằng cách sử dụng Hash::make
         $user->password = Hash::make($request->input('registerPassword'));
 
-        $user->ROLE = 0;
+        $user->Status = 1;
         $user->save();
 
         session()->flash('success', 'Đăng ký thành công, vui lòng đăng nhập!');

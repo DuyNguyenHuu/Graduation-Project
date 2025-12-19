@@ -16,7 +16,7 @@ class User extends Authenticatable
     protected $primaryKey = 'IdUser';
     public $incrementing = true;
     protected $keyType = 'int';
-    protected $fillable = ['IdUser', 'Name', 'email', 'password', 'Phone', 'ROLE', 'created_at', 'updated_at'];
+    protected $fillable = ['IdUser', 'Name', 'email', 'password', 'Phone', 'Status','ROLE', 'created_at', 'updated_at'];
     public function getAuthIdentifierName()
     {
         return 'IdUser';

@@ -74,7 +74,7 @@ class ProductListController extends Controller
         $product->SubCategory=$request->input('subCategoryProduct');
         $product->Description=$cleanHtml;
         $product->save();
-        return redirect('productList');
+        return redirect('productList')->with('success', 'Product added successfully!');
 
     }
 

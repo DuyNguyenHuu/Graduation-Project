@@ -2,8 +2,26 @@
 
 @section('content')
     <div class="popularCategory">
+        <div class="product-container">
+            <div>
+                <h4>Best Selling Products</h4>
+            </div>
+            <div class="product-container">
+                <button class="arrow arrow-left" id="leftArrow" onclick="scrollProducts(-1)" disabled>&#8592;</button>
+                <div class="product-list">
+                    @forelse ($getProduct as $row)
+                        <div class="product-item">
+                            @include('components.product_box', ['product' => $row])
+                        </div>
+                    @empty
+                        <p>No products.</p>
+                    @endforelse
+                </div>
+                <button class="arrow arrow-right" id="rightArrow" onclick="scrollProducts(1)">&#8594;</button>
+            </div>
+        </div>
         <form method="GET" action="{{ route('home') }}" id="categoryForm">
-            <div style="display:flex; justify-content: space-between;">
+            <div style="display:flex; justify-content: space-between;" class="product-container">
                 <div><h4>Popular Categories</h4></div>
                 <div>
                     <label>Category</label><br>
@@ -27,7 +45,7 @@
                         @include('components.product_box', ['product' => $row])
                     </div>
                 @empty
-                    <p>Không có sản phẩm nào trong danh mục này.</p>
+                    <p>No products.</p>
                 @endforelse
             </div>
             <button class="arrow arrow-right" id="rightArrow" onclick="scrollProducts(1)">&#8594;</button>
