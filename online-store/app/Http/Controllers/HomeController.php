@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -43,6 +45,45 @@ class HomeController extends Controller
                             ->orderByDesc('total_sold')
                             ->limit(10)
                             ->get();
-        return view('content.home',compact('getCategory', 'getProduct', 'getFrequentProduct'));
+        
+        $userRecommendations = [];
+        if (Auth::check()) {
+            try {
+                $userId = Auth::user()->IdUser;
+
+                $response = Http::timeout(3)
+                    ->get(env('RECOMMENDER_API').'/recommend-user/'.$userId);
+
+                if ($response->successful()) {
+                    $userRecommendations = collect(
+                $response->json()['recommendations']
+                )->map(function ($item) {
+                    return (object) $item;
+                });
+                }
+            } catch (\Exception $e) {
+                $userRecommendations = [];
+            }
+        }
+        $itemRecommendations = [];
+        if (Auth::check()) {
+            try {
+                $userId = Auth::user()->IdUser;
+
+                $response = Http::timeout(3)
+                    ->get(env('RECOMMENDER_API').'/recommend-item/'.$userId);
+
+                if ($response->successful()) {
+                    $itemRecommendations = collect(
+                $response->json()['recommendations']
+                )->map(function ($item) {
+                    return (object) $item;
+                });
+                }
+            } catch (\Exception $e) {
+                $itemRecommendations = [];
+            }
+        }
+        return view('content.home',compact('getCategory', 'getProduct', 'getFrequentProduct', 'userRecommendations', 'itemRecommendations'));
     }
 }

@@ -4,6 +4,42 @@
     <div class="popularCategory">
         <div class="product-container">
             <div>
+                <h4>Item Recommended Products For You</h4>
+            </div>
+            <div class="product-container">
+                <button class="arrow arrow-left" id="leftArrow" onclick="scrollProducts(-1)" disabled>&#8592;</button>
+                <div class="product-list">
+                    @forelse ($itemRecommendations as $row)
+                        <div class="product-item">
+                            @include('components.product_box', ['product' => $row])
+                        </div>
+                    @empty
+                        <p>No products.</p>
+                    @endforelse
+                </div>
+                <button class="arrow arrow-right" id="rightArrow" onclick="scrollProducts(1)">&#8594;</button>
+            </div>
+        </div>
+        <div class="product-container">
+            <div>
+                <h4> User Recommended Products For You</h4>
+            </div>
+            <div class="product-container">
+                <button class="arrow arrow-left" id="leftArrow" onclick="scrollProducts(-1)" disabled>&#8592;</button>
+                <div class="product-list">
+                    @forelse ($userRecommendations as $row)
+                        <div class="product-item">
+                            @include('components.product_box', ['product' => $row])
+                        </div>
+                    @empty
+                        <p>No products.</p>
+                    @endforelse
+                </div>
+                <button class="arrow arrow-right" id="rightArrow" onclick="scrollProducts(1)">&#8594;</button>
+            </div>
+        </div>
+        <div class="product-container">
+            <div>
                 <h4>Best Selling Products</h4>
             </div>
             <div class="product-container">
