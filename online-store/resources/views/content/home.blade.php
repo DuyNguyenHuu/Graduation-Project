@@ -2,12 +2,10 @@
 
 @section('content')
     <div class="popularCategory">
-        <div class="product-container">
-            <div>
-                <h4>Item Recommended Products For You</h4>
-            </div>
+        <div class="product-section">
+            <h4>Item Recommended Products For You</h4>
             <div class="product-container">
-                <button class="arrow arrow-left" id="leftArrow" onclick="scrollProducts(-1)" disabled>&#8592;</button>
+                <button class="arrow arrow-left" onclick="scrollProducts(this, -1)" disabled>&#8592;</button>
                 <div class="product-list">
                     @forelse ($itemRecommendations as $row)
                         <div class="product-item">
@@ -17,15 +15,14 @@
                         <p>No products.</p>
                     @endforelse
                 </div>
-                <button class="arrow arrow-right" id="rightArrow" onclick="scrollProducts(1)">&#8594;</button>
+                <button class="arrow arrow-right" onclick="scrollProducts(this, 1)">&#8594;</button>
             </div>
         </div>
-        <div class="product-container">
-            <div>
-                <h4> User Recommended Products For You</h4>
-            </div>
+
+        <div class="product-section">
+            <h4>User Recommended Products For You</h4>
             <div class="product-container">
-                <button class="arrow arrow-left" id="leftArrow" onclick="scrollProducts(-1)" disabled>&#8592;</button>
+                <button class="arrow arrow-left" onclick="scrollProducts(this, -1)" disabled>&#8592;</button>
                 <div class="product-list">
                     @forelse ($userRecommendations as $row)
                         <div class="product-item">
@@ -35,15 +32,14 @@
                         <p>No products.</p>
                     @endforelse
                 </div>
-                <button class="arrow arrow-right" id="rightArrow" onclick="scrollProducts(1)">&#8594;</button>
+                <button class="arrow arrow-right" onclick="scrollProducts(this, 1)">&#8594;</button>
             </div>
         </div>
-        <div class="product-container">
-            <div>
-                <h4>Best Selling Products</h4>
-            </div>
+
+        <div class="product-section">
+            <h4>Best Selling Products</h4>
             <div class="product-container">
-                <button class="arrow arrow-left" id="leftArrow" onclick="scrollProducts(-1)" disabled>&#8592;</button>
+                <button class="arrow arrow-left" onclick="scrollProducts(this, -1)" disabled>&#8592;</button>
                 <div class="product-list">
                     @forelse ($getProduct as $row)
                         <div class="product-item">
@@ -53,28 +49,27 @@
                         <p>No products.</p>
                     @endforelse
                 </div>
-                <button class="arrow arrow-right" id="rightArrow" onclick="scrollProducts(1)">&#8594;</button>
+                <button class="arrow arrow-right" onclick="scrollProducts(this, 1)">&#8594;</button>
             </div>
         </div>
+
         <form method="GET" action="{{ route('home') }}" id="categoryForm">
-            <div style="display:flex; justify-content: space-between;" class="product-container">
-                <div><h4>Popular Categories</h4></div>
-                <div>
-                    <label>Category</label><br>
-                    <select name="productCategory" onchange="document.getElementById('categoryForm').submit();">
-                        <option value="">Category</option>
-                        @foreach ($getCategory as $row)
-                            <option value="{{ $row->IdCategory }}"
-                                {{ request('productCategory') == $row->IdCategory ? 'selected' : '' }}>
-                                {{ $row->NameCategory }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+            <div class="product-container" style="justify-content: space-between;">
+                <h4>Popular Categories</h4>
+                <select name="productCategory" onchange="this.form.submit()">
+                    <option value="">Category</option>
+                    @foreach ($getCategory as $row)
+                        <option value="{{ $row->IdCategory }}"
+                            {{ request('productCategory') == $row->IdCategory ? 'selected' : '' }}>
+                            {{ $row->NameCategory }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
         </form>
+
         <div class="product-container">
-            <button class="arrow arrow-left" id="leftArrow" onclick="scrollProducts(-1)" disabled>&#8592;</button>
+            <button class="arrow arrow-left" onclick="scrollProducts(this, -1)" disabled>&#8592;</button>
             <div class="product-list">
                 @forelse ($getProduct as $row)
                     <div class="product-item">
@@ -84,47 +79,36 @@
                     <p>No products.</p>
                 @endforelse
             </div>
-            <button class="arrow arrow-right" id="rightArrow" onclick="scrollProducts(1)">&#8594;</button>
+            <button class="arrow arrow-right" onclick="scrollProducts(this, 1)">&#8594;</button>
         </div>
-        <script>
-            const productList = document.querySelector('.product-list');
-            const leftArrow = document.getElementById('leftArrow');
-            const rightArrow = document.getElementById('rightArrow');
-            const productWidth = document.querySelector('.product-item').offsetWidth + 20; // Chiều rộng mỗi sản phẩm + khoảng cách
-            let currentTransform = 0; // Biến lưu vị trí hiện tại
-
-            // Hàm cuộn sản phẩm
-            function scrollProducts(direction) {
-                const maxScrollWidth = productList.scrollWidth - productList.clientWidth; // Đo chiều dài danh sách sản phẩm trừ đi chiều rộng vùng hiển thị
-                currentTransform += direction * productWidth;
-
-                // Giới hạn cuộn
-                if (currentTransform < 0) {
-                    currentTransform = 0; // Không cuộn qua trái quá
-                } else if (currentTransform > maxScrollWidth) {
-                    currentTransform = maxScrollWidth; // Không cuộn qua phải quá
-                }
-
-                // Áp dụng biến hiện tại vào transform
-                productList.style.transform = `translateX(-${currentTransform}px)`;
-
-                // Cập nhật trạng thái các mũi tên
-                updateArrowState(currentTransform, maxScrollWidth);
-            }
-
-            // Hàm cập nhật trạng thái mũi tên
-            function updateArrowState(currentTransform, maxScrollWidth) {
-                // Nếu cuộn đến đầu, vô hiệu hóa mũi tên trái
-                leftArrow.disabled = currentTransform === 0;
-                leftArrow.classList.toggle('disabled', currentTransform === 0);
-
-                // Nếu cuộn đến cuối, vô hiệu hóa mũi tên phải
-                rightArrow.disabled = currentTransform === maxScrollWidth;
-                rightArrow.classList.toggle('disabled', currentTransform === maxScrollWidth);
-            }
-
-            // Gọi hàm để kiểm tra trạng thái ban đầu khi trang tải
-            updateArrowState(currentTransform, productList.scrollWidth - productList.clientWidth);
-        </script>
     </div>
+
+    <script>
+        function scrollProducts(button, direction) {
+            const container = button.closest('.product-container');
+            const productList = container.querySelector('.product-list');
+            const leftArrow = container.querySelector('.arrow-left');
+            const rightArrow = container.querySelector('.arrow-right');
+            
+            const productItem = productList.querySelector('.product-item');
+            if (!productItem) return;
+
+            const productWidth = productItem.offsetWidth + 20;
+
+            let currentTransform = productList.dataset.transform
+                ? parseInt(productList.dataset.transform)
+                : 0;
+
+            const maxScrollWidth = productList.scrollWidth - productList.clientWidth;
+
+            currentTransform += direction * productWidth;
+            currentTransform = Math.max(0, Math.min(currentTransform, maxScrollWidth));
+
+            productList.style.transform = `translateX(-${currentTransform}px)`;
+            productList.dataset.transform = currentTransform;
+
+            leftArrow.disabled = currentTransform === 0;
+            rightArrow.disabled = currentTransform === maxScrollWidth;
+        }
+    </script>
 @endsection
