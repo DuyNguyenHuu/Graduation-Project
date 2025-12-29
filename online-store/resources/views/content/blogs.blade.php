@@ -3,7 +3,7 @@
     <div class="chooseBlog">
         <div class="menuBlog">
             <div style="background-color: white; padding: 1em; margin-bottom: 2em;">
-                <input type="text" name="searchBlog" style="width:12em;"placeholder="Search blog">
+                <input type="text" name="searchBlog" style="box-sizing: border-box; width: 90%;"placeholder="Search blog">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
             <div style="background-color: white; padding: 1em">

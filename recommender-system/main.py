@@ -129,7 +129,7 @@ user_similarity_df = pd.DataFrame(
 
 
 def get_similar_users(user_id, top_n=5):
-    if user_id not in user_similarity_df:
+    if user_id not in user_similarity_df.index:
         return pd.Series(dtype=float)
     sims = user_similarity_df[user_id].drop(user_id)
     sims = sims[sims > 0]
