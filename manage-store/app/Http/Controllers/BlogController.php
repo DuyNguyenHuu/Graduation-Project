@@ -2,38 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBlogRequest;
 use Illuminate\Http\Request;
-use App\Models\Blogs;
 use Illuminate\Support\Facades\DB;
-use Mews\Purifier\Facades\Purifier;
+use App\Services\BlogService;
+use App\Http\Requests\UpdateBlogRequest;
 
 class BlogController extends Controller
 {
+    protected $blogService;
+    public function __construct(BlogService $blogService)
+    {
+        $this->blogService = $blogService;
+    }
+
     public function index(Request $request){
-        $query = DB::table('blogs')
-            ->join('bcategories', 'blogs.CategoryBlog', '=', 'bcategories.IdBCategory')
-            ->select('blogs.*', 'bcategories.BCategory')
-            ->orderByDesc('blogs.IdBlog');
-
-        // ---- SEARCH ----
-        if ($request->filled('search')) {
-            $keyword = $request->search;
-
-            $query->where(function ($q) use ($keyword) {
-                $q->where('blogs.Blog', 'like', "%{$keyword}%")
-                ->orWhere('bcategories.BCategory', 'like', "%{$keyword}%");
-            });
-        }
-
-        // ---- FILTER STATUS ----
-        if ($request->filled('status')) {
-            $query->where('blogs.StatusBlog', '=', $request->status);
-        }
-
-        // ---- PAGINATION + KEEP FILTER ----
-        $getBlog = $query->paginate(10);
-        $getBlog->appends($request->all());
-
+        $getBlog = $this->blogService->getList($request);
         return view('blogs.blogs.indexBlog', [
             'getBlog' => $getBlog,
             'search'  => $request->search
@@ -45,6 +29,12 @@ class BlogController extends Controller
         $getCategoryBlog=DB::table('bcategories')->select('*')->get();
         return view('blogs.blogs.addBlog', compact('getCategoryBlog'));
     }
+
+    public function store(StoreBlogRequest $request){
+        $this->blogService->create($request->validated());
+        return redirect('/blogs')->with('success', 'Blog created successfully.');
+    }
+
     public function edit($idBlog){
         $blogShow=DB::table('blogs')->where('IdBlog', '=', $idBlog)
                     ->join('bcategories', 'bcategories.IdBCategory', '=', 'blogs.CategoryBlog')
@@ -52,44 +42,14 @@ class BlogController extends Controller
         $categoryBlogShow=DB::table('bcategories')->select('*')->get();
         return view('blogs.blogs.updateBlog', compact('blogShow', 'categoryBlogShow'));
     }
-    public function store(Request $request){
-        $request->validate([
-            'nameBlog'=>'required|max:255',
-            'idBlog'=>'required|max:255'
-        ]);
 
-        $cleanHtmlBlog = Purifier::clean($request->descriptionBlog);
+    public function update(UpdateBlogRequest $request, $idBlog){
+        $this->blogService->update($idBlog, $request->validated());
+        return redirect('/blogs')->with('success', 'Blog updated successfully.');
+    }
 
-        $blog = new Blogs();
-        $blog->IdBlog = $request->input('idBlog');
-        $blog->Blog = $request->input('nameBlog');
-        $blog->ImageBlog = $request->input('imageBlog');
-        $blog->DescriptionBlog = $cleanHtmlBlog;
-        $blog->CategoryBlog = $request->input('categoryBlog');
-        $blog->StatusBlog = $request->input('statusBlog');
-        $blog->save();
-        return redirect('/blogs');
-    }
-    public function update(Request $request, $idBlog){
-        $request->validate([
-            'nameBlog'=>'required|max:255',
-            'idBlog'=>'required|max:255'
-        ]);
-        $htmlBlog = Purifier::clean($request->descriptionBlog);
-        $blogUpdate=DB::table('blogs')->where('idBlog', $idBlog)
-                        ->update([
-                            'Blog'=>$request->input('nameBlog'),
-                            'IdBlog'=>$request->input('idBlog'),
-                            'StatusBlog'=>$request->input('statusBlog'),
-                            'ImageBlog'=>$request->input('imageBlog'),
-                            'StatusBLog'=>$request->input('statusBlog'),
-                            'DescriptionBlog'=>$htmlBlog
-                        ]);
-        return redirect('/blogs');
-    }
     public function destroy($idBlog){
-        $blogDelete=DB::table('blogs')->where('idBlog', $idBlog)
-                        ->delete();
-        return redirect('/blogs');
+        $this->blogService->delete($idBlog);
+        return redirect('/blogs')->with('success', 'Blog deleted successfully.');
     }
 }

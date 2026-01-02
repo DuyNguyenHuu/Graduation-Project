@@ -3,51 +3,43 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\BCategories;
-use Illuminate\Support\Facades\DB;
+use App\Services\BCategoryService;
+use App\Http\Requests\StoreBCategoryRequest;
+use App\Http\Requests\UpdateBCategoryRequest;
 
 class BCategoryController extends Controller
 {
+    protected $bCategoryService;
+    public function __construct(BCategoryService $bCategoryService){
+        $this->bCategoryService = $bCategoryService;
+    }
+
     public function index(){
-        $bCategoryList=DB::table('bcategories')->select('*')->get();
+        $bCategoryList = $this->bCategoryService->getAll();
         return view('blogs.bcategories.indexBCategory', compact('bCategoryList'));
     }
+
     public function create(){
         return view('blogs.bcategories.addBCategory');
     }
-    public function store(Request $request){
-        $request->validate([
-            'nameBCategory'=>'required',
-            'idBCategory'=>'required'
-        ]);
 
-        $bCategory = new BCategories();
-        $bCategory->BCategory = $request->input('nameBCategory');
-        $bCategory->IdBCategory = $request->input('idBCategory');
-        $bCategory->StatusBCategory = $request->input('statusBCategory');
-        $bCategory->save();
-        return redirect('/bcategories');
+    public function store(StoreBCategoryRequest $request){
+        $this->bCategoryService->create($request->validated());
+        return redirect('/bcategories')->with('success', 'BCategory created successfully.');
     }
+
     public function edit($idBCategory){
-        $bCategoryShow=DB::table('bcategories')->where('IdBCategory', $idBCategory)->first();
+        $bCategoryShow = $this->bCategoryService->findById($idBCategory);
         return view('blogs.bcategories.updateBCategory')->with('bCategoryShow', $bCategoryShow);
     }
-    public function update(Request $request, $idBCategory){
-        $request->validate([
-            'nameBCategory'=>'required',
-            'idBCategory'=>'required'
-        ]);
-        $bCategoryUpdate=DB::table('bcategories')->where('idBCategory', $idBCategory)
-                        ->update([
-                            'BCategory'=>$request->input('nameBCategory'),
-                            'IdBCategory'=>$request->input('idBCategory'),
-                            'StatusBCategory'=>$request->input('statusBCategory')
-                        ]);
-        return redirect('/bcategories');
+
+    public function update(UpdateBCategoryRequest $request, $idBCategory){
+        $this->bCategoryService->update($idBCategory, $request->validated());
+        return redirect('/bcategories')->with('success', 'BCategory updated successfully.');
     }
+
     public function destroy($idBCategory){
-        $bCategoryDelete=DB::table('bcategories')->where('idBCategory', $idBCategory)
-                        ->delete();
-        return redirect('/bcategories');
+        $this->bCategoryService->delete($idBCategory);
+        return redirect('/bcategories')->with('success', 'BCategory deleted successfully.');
     }
 }

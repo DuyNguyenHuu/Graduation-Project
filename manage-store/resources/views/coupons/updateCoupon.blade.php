@@ -24,7 +24,7 @@
                     <label>No. Of Time</label>
                     <input type="number" min="1" name="time" value="{{ $getCoupon->Time }}">
                     <label>Status</label><br>
-                    <select name="status" value="{{ $getCoupon->StatusCoupon }}">
+                    <select name="status">
                         <option value="1" {{ $getCoupon->StatusCoupon == 1 ? 'selected' : '' }}>Enabled</option>
                         <option value="0" {{ $getCoupon->StatusCoupon == 0 ? 'selected' : '' }}>Disabled</option>
                     </select><br>

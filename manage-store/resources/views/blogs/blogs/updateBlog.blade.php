@@ -14,9 +14,9 @@
             @csrf
             @method('PUT')
             <label>Name Blog:</label><br>
-            <input name="nameBlog" id="NameBlog" value="{{ $blogShow->Blog }} required"><br>
+            <input name="nameBlog" id="NameBlog" value="{{ $blogShow->Blog }}" required><br>
             <label>Id Blog:</label><br>
-            <input name="idBlog" id="BlogSlug" value="{{ $blogShow->IdBlog }} required"><br>
+            <input name="idBlog" id="BlogSlug" value="{{ $blogShow->IdBlog }}" required><br>
             <label>Image Blog:</label><br>
             <input name="imageBlog" value="{{ $blogShow->ImageBlog }}"><br>
             <label>Name Category</label><br>
@@ -31,7 +31,7 @@
                 <option value="0" {{ $blogShow->StatusBlog == 0 ? 'selected' : '' }}>UnPublish</option>
             </select><br>
             <label>Description Blog:</label><br>
-            <textarea name="descriptionBlog" id="editor"">{{ $blogShow->DescriptionBlog }}</textarea>
+            <textarea name="descriptionBlog" id="editor">{{ $blogShow->DescriptionBlog }}</textarea>
             <button type="submit">Submit</button>
         </form>
         <script>

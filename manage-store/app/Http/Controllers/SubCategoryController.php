@@ -1,71 +1,72 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
+
+use App\Services\SubCategoryService;
+use App\Http\Requests\StoreSubCategoryRequest;
+use App\Http\Requests\UpdateSubCategoryRequest;
 use Illuminate\Http\Request;
-use App\Models\SubCategories;
 
 class SubCategoryController extends Controller
 {
-    public function index(){
-        $subCategoryList=DB::table('subcategories')
-                        ->join('categories','subcategories.IdSubCategory','=', 'categories.IdCategory')
-                        ->orderBy('IdCategory', 'asc')
-                        ->select('*')->get();
+    protected $subCategoryService;
+
+    public function __construct(SubCategoryService $subCategoryService)
+    {
+        $this->subCategoryService = $subCategoryService;
+    }
+
+    public function index()
+    {
+        $subCategoryList = $this->subCategoryService->getAll();
         return view('categories.subcategories.indexSubCategory', compact('subCategoryList'));
     }
 
-    public function create(){
-        $categoryList=DB::table('categories')->select('*')->get();
+    public function create()
+    {
+        $categoryList = $this->subCategoryService->getCategories();
         return view('categories.subcategories.addSubCategory', compact('categoryList'));
     }
 
-    public function store(request $request){
-        $request->validate([
-            'nameSubCategory'=>'required',
-            'idSubCategory'=>'required'
-        ]);
-
-        $subCategory = new SubCategories();
-        $subCategory->IdSub = $request->input('idSubCategory');
-        $subCategory->Name = $request->input('nameSubCategory');
-        $subCategory->IdSubCategory = $request->input('idCategory');
-        $subCategory->StatusSub = $request->input('statusSub');
-        $subCategory->save();
-        return redirect('/subcategories');
+    public function store(StoreSubCategoryRequest $request)
+    {
+        $this->subCategoryService->create($request->validated());
+        return redirect('/subcategories')->with('success', 'SubCategory created successfully.');
     }
 
-    public function edit(Request $request, $IdSub){
-        $subCategoryShow=DB::table('subcategories')
-                        ->join('categories','subcategories.IdSubCategory','=','categories.IdCategory')
-                        ->where('IdSub',$IdSub)
-                        ->where('IdSubCategory', $request->input('hiddenIdCategory'))
-                        ->first();
-        $categoryList=DB::table('categories')->select('*')->get();
-        return view('categories.subcategories.updateSubCategory', compact('categoryList', 'subCategoryShow'));
+    public function edit(Request $request, $IdSub)
+    {
+        $subCategoryShow = $this->subCategoryService->find(
+            $IdSub,
+            $request->hiddenIdCategory
+        );
+
+        $categoryList = $this->subCategoryService->getCategories();
+
+        return view(
+            'categories.subcategories.updateSubCategory',
+            compact('subCategoryShow', 'categoryList')
+        );
     }
 
-    public function update(request $request, $IdSub){
-        $request->validate([
-            'nameCategory'=>'required',
-            'idSubCategory'=>'required'
-        ]);
-        $subCategoryUpdate=DB::table('subcategories')
-                        ->where('IdSub', $IdSub)
-                        ->Where('IdSubCategory', $request->input('hiddenCategory'))
-                        ->update([
-                            'IdSub'=>$request->input('idSubCategory'),
-                            'Name'=>$request->input('nameSubCategory'),
-                            'IdSubCategory'=>$request->input('nameCategory'),
-                            'StatusSub'=>$request->input('statusSubCategory')
-                        ]);
-        return redirect('/subcategories');
+    public function update(UpdateSubCategoryRequest $request, $IdSub)
+    {
+        $this->subCategoryService->update(
+            $IdSub,
+            $request->hiddenCategory,
+            $request->validated()
+        );
+
+        return redirect('/subcategories')->with('success', 'SubCategory updated successfully.');
     }
 
-    public function destroy(Request $request, $IdSub){
-        $subCategoryDelete=DB::table('subcategories')->where('idSub', $IdSub)
-                                                            ->where('idSubCategory', $request->input('idCategory'))
-                        ->delete();
-        return redirect('/subcategories');
+    public function destroy(Request $request, $IdSub)
+    {
+        $this->subCategoryService->delete(
+            $IdSub,
+            $request->idCategory
+        );
+
+        return redirect('/subcategories')->with('success', 'SubCategory deleted successfully.');
     }
 }

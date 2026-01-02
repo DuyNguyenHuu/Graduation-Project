@@ -160,7 +160,7 @@ class ProductListController extends Controller
                             'SubCategory'=>$request->input('subCategoryProduct'),
                             'Description'=>$cleanHtml
                         ]);
-        return redirect('/productList');
+        return redirect('/productList')->with('success', 'Product updated successfully!');
     }
 
     public function destroy($IdProduct){

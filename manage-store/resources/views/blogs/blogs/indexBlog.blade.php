@@ -74,4 +74,5 @@
             </div>
         </div>
     </div>
+    @include('layouts.success')
 @endsection

@@ -32,7 +32,7 @@
                                     <form action="subcategories/{{ $row->IdSub }}/edit" METHOD="GET">
                                         @csrf
                                         <button type="submit" class="btn btn-primary">
-                                            <input name="hiddenIdCategory" type="hidden" value="{{ $row->IdCategory }}">
+                                            <input name="hiddenIdCategory" type="hidden" value="{{ $row->IdSubCategory }}">
                                             <i class="fa-solid fa-pencil"></i>
                                         </button>
                                     </form>
@@ -42,7 +42,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">
-                                            <input name="idCategory" type="hidden" value="{{ $row->IdCategory }}">
+                                            <input name="idCategory" type="hidden" value="{{ $row->IdSubCategory }}">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </form>
@@ -54,4 +54,5 @@
             </table>
         </div>
     </div>
+    @include('layouts.success')
 @endsection
