@@ -75,7 +75,7 @@
                 <div class="dropdown pb-4">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                        <span class="d-none d-sm-inline mx-1">{{-- Kiểm tra nếu người dùng đã đăng nhập và hiển thị tên của người dùng --}}
+                        <span class="d-none d-sm-inline mx-1">
                             @if (Auth::check())
                                 {{ Auth::user()->Name }}
                             @endif
@@ -87,8 +87,6 @@
                                 {{ Auth::user()->Name }}
                             @endif
                         </a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>

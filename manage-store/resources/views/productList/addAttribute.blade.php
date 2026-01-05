@@ -26,5 +26,6 @@
             <button type="submit">Submit</button>
         </form>
     </div>
+    @include('layouts.fail')
 </div>
 @endsection

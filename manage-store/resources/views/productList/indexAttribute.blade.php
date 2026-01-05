@@ -44,4 +44,5 @@
             </table>
         </div>
     </div>
+    @include('layouts.success')
 @endsection

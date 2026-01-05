@@ -103,5 +103,5 @@
             setTimeout(() => { toast.style.opacity = 0; }, 3000);
         </script>
     @endif
-
+    @include('layouts.success')
 @endsection
