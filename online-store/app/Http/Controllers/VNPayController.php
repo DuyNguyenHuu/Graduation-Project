@@ -64,40 +64,11 @@ class VNPayController extends Controller
     public function returnPayment(Request $request)
     {
         if ($request->vnp_ResponseCode == "00") {
-            $order = new Order();
-            $order->user_id = Auth::user()->IdUser;
-            $order->consignee = session('delivery_info')['fullname'];
-            $order->phone = session('delivery_info')['phone'];
-            $order->province = session('delivery_info')['province_name'];
-            $order->ward = session('delivery_info')['ward_name'];
-            $order->address = session('delivery_info')['address'];
-            $order->note = session('delivery_info')['note'];
-            $order->created_at = now();
-            if (session('coupon') != null) {
-                $order->total = session('coupon')['final_total'];
-            } else {
-                $order->total = session('total');
-            }
-            $order->save();
-            foreach (session('cart') as  $item) {
-                $orderDetail = new OrderDetail();
-                $orderDetail->order_id = $order->id;
-                $orderDetail->product_id = $item['id'];
-                $orderDetail->quantity = $item['quantity'];
-                $orderDetail->price = $item['price'];
-                $orderDetail->save();
-            }
-            session()->forget('cart');
-            session()->forget('coupon');
-            session()->forget('delivery_info');
-            return redirect('/result')->with('message', 'Payment successful!');
+            session()->put('payment_method', 'vnpay');
+            session()->put('vnpay_status', 'success');
         } else {
-            session()->forget('coupon');
-            session()->forger('delivery_info');
-            return redirect('/result')->with('message', 'payment failed!');
+            session()->put('vnpay_status', 'fail');
         }
-    }
-    public function result(){
-        return view('content.result');
+        return view('content.vnpay_return');
     }
 }

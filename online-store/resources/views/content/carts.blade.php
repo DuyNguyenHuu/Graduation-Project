@@ -95,7 +95,7 @@
             </a>
             @if(session()->has('cart') && count(session('cart')) > 0)
                 <a href="{{ route('checkout.form') }}">
-                    <button>Checkout</button>
+                    <button>Place Order</button>
                 </a>
             @endif
         </div>

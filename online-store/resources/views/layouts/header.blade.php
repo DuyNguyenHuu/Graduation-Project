@@ -82,6 +82,8 @@
 
         <div class="check">
             <div style="text-align:center">
+                <a style="text-decoration: none; color: black" href="#"><i class="fa-solid fa-heart"></i></i>
+                <p>Wishlist</p></a>
             </div>
             <div style="text-align:center">
                 <a style="text-decoration: none; color: black" href="{{ route('cart.view') }}"><i class="fa-solid fa-cart-shopping"></i>

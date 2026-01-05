@@ -24,6 +24,10 @@ class OrdersController extends Controller
             $query->where('orders.status', $request->status);
         }
 
+        if($request->payment_method) {
+            $query->where('orders.method', $request->payment_method);
+        }
+
         if ($request->date){
             $query->where('orders.created_at', '>=', $request->date);
         }

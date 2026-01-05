@@ -34,6 +34,7 @@ class AccountsController extends Controller
         if (Auth::attempt(['email' => $email, 'password' => $password]) && Auth::user()->Status == 1) {
             // Tạo lại session để tránh session fixation
             $request->session()->regenerate();
+            session()->put('payment_method', 'cod');
             session()->forget('coupon');
 
             // Chuyển hướng đến trang chủ

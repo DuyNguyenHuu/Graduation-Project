@@ -1,12 +1,7 @@
 @extends('layouts.template')
 
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
+    @include('components.success')
 
     <div class="detailProduct">
         <div style="display: flex; justify-content: space-between;">

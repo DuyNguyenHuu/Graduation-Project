@@ -35,7 +35,7 @@
                 </div>
             </form>
         </div>
-        <div>
+        <div style="width:90%">
             <div class="listCoupon">
                 @foreach ($getCoupon as $coupon)
                     <div>

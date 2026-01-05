@@ -27,6 +27,15 @@ class BlogsController extends Controller
                         ->select('*')
                         ->paginate(8);
         }
+        if ($request->has('searchBlog')) {
+            $getBlog = DB::table('blogs')
+                        ->join('bcategories', 'blogs.CategoryBlog', '=', 'bcategories.IdBCategory')
+                        ->where('blogs.Blog', 'like', '%' . $request->searchBlog . '%')
+                        ->where('blogs.StatusBlog', '=', '1')
+                        ->where('bcategories.StatusBCategory', '=', '1')
+                        ->select('*')
+                        ->paginate(8);
+        }
         return view('content.blogs', compact('getBlog', 'getBCategory'));
     }
 

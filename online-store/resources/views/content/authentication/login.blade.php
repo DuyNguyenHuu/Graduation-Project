@@ -34,27 +34,22 @@
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div>
-                    <label>Name</label><br>
-                    <input type="text" style=" width:26em;" name="registerName" placeholder="Enter Name" value="{{ old('registerName') }}">
+                    <input type="text" class="account" name="registerName" placeholder="Enter Name" value="{{ old('registerName') }}">
                 </div>
-                <div style="display:flex;gap:2.5em;width:26em;">
+                <div style="display:flex;gap:2.5em;">
                     <div>
-                        <label>Email</label>
-                        <input type="email" name="registerEmail" placeholder="Email" value="{{ old('registerEmail') }}">
+                        <input type="email" class="account" name="registerEmail" placeholder="Email" value="{{ old('registerEmail') }}">
                     </div>
                     <div>
-                        <label>Phone</label>
-                        <input type="text" name="registerPhone"placeholder="Enter Phone" value="{{ old('registerPhone') }}">
+                        <input type="text" class="account" name="registerPhone"placeholder="Enter Phone" value="{{ old('registerPhone') }}">
                     </div>
                 </div>
-                <div style="display:flex;gap:2.5em;width:26em;">
+                <div style="display:flex;gap:2.5em;">
                     <div>
-                        <label>Password</label>
-                        <input type="password" name="registerPassword" placeholder="Enter Password">
+                        <input type="password" class="account" name="registerPassword" placeholder="Enter Password">
                     </div>
                     <div>
-                        <label>Confirm Password</label>
-                        <input type="password" name="registerPassword_confirmation" placeholder="Confirm Password">
+                        <input type="password" class="account" name="registerPassword_confirmation" placeholder="Confirm Password">
                     </div>
                 </div>
                 <button type="submit">Sign up</button>

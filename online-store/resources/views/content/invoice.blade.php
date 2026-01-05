@@ -34,9 +34,32 @@
                 @endif
             </div>
         </div>
-        <a href="/payment/create">
-            <button>Payment</button>
-        </a>
+        <div class="invoice_method">
+            <h3>Payment Method</h3>
+            <input type="radio" name="payment" value="cod" checked>Cash on Delivery
+            <input type="radio" name="payment" value="vnpay">VNPay
+            <br>
+            <a href="/payment/create" target="_blank" id="vnpayBtn" style="display: none">
+                <button>Payment</button>
+            </a>
+        </div>
+        <script>
+            const paymentRadios = document.querySelectorAll('input[name="payment"]');
+            const vnpayBtn = document.getElementById('vnpayBtn');
+
+            paymentRadios.forEach(radio => {
+                radio.addEventListener('change', function () {
+                    if (this.value === 'vnpay') {
+                        vnpayBtn.style.display = 'inline-block';
+                    } else {
+                        vnpayBtn.style.display = 'none';
+                    }
+                });
+            });
+        </script>
+        <form action="{{ route('result') }}">
+            <button type="submit">Finish</button>
+        </form>
     </div>
 
 @endsection

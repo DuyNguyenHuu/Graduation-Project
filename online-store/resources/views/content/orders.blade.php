@@ -28,6 +28,14 @@
                             <option value="0" {{ request('status') === "0" ? 'selected' : '' }}>Delivered</option>
                         </select>
                     </div>
+                    <div>
+                        <label>Payment Method</label><br>
+                        <select name="payment_method">
+                            <option value="">All Method</option>
+                            <option value="cod" {{ request('method') === "cod" ? 'selected' : '' }}>Cash on Delivery</option>
+                            <option value="vnpay" {{ request('method') === "vnpay" ? 'selected' : '' }}>Paid Online</option>
+                        </select>
+                    </div>
                     <button type="submit">Filter</button>
                 </div>
             </form>
@@ -47,6 +55,11 @@
                             <p><strong>Status:</strong> <span style="color:#6F42C1">Shipped</span></p>
                         @elseif ($row->status==0)
                             <p><strong>Status:</strong> <span style="color:#28A745">Delivered</span></p>
+                        @endif
+                        @if ($row->method ==='cod')
+                            <p><strong>Payment Method:</strong> Cash on Delivery</p>
+                        @else
+                            <p><strong>Payment Method:</strong> Paid Online</p>
                         @endif
                         <p><strong>Total Amount:</strong> ${{ number_format($row->total, 2) }}</p>
                     </div>

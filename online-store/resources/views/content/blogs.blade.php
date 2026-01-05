@@ -2,11 +2,13 @@
 @section('content')
     <div class="chooseBlog">
         <div class="menuBlog">
-            <div style="background-color: white; padding: 1em; margin-bottom: 2em;">
-                <input type="text" name="searchBlog" style="box-sizing: border-box; width: 90%;"placeholder="Search blog">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-            <div style="background-color: white; padding: 1em">
+            <div class="filter">
+                <div>
+                    <form>
+                        <input type="text" name="searchBlog" style="box-sizing: border-box;"placeholder="Search blog">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
                 <div style="font-weight: bold; font-size: 18px;">
                     <a href="/blogs">Blog Category</a>
                 </div>
@@ -18,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div style="width:80%">
             <div class="listBlog">
                 @foreach ($getBlog as $blog)
                     <div>
