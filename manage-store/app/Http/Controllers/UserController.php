@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\UserService;
+use App\Http\Services\UserService;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\UpdateUserRequest;
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\SubCategoryService;
+use App\Http\Services\SubCategoryService;
 use App\Http\Requests\StoreSubCategoryRequest;
 use App\Http\Requests\UpdateSubCategoryRequest;
 use Illuminate\Http\Request;

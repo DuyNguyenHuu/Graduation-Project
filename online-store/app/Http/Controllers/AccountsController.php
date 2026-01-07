@@ -2,125 +2,72 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Services\AccountService;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class AccountsController extends Controller
 {
-    public function index(){
+    protected AccountService $accountService;
+
+    public function __construct(AccountService $accountService)
+    {
+        $this->accountService = $accountService;
+    }
+
+    public function index()
+    {
         return view('content.authentication.login');
     }
-    public function login(Request $request){
-        $validator = Validator::make($request->all(), [
-            'loginEmail' => 'required|email',
-            'loginPassword' => [
-                'required',
-                'min:8',
-                "regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?!.*[^A-Za-z0-9].*[^A-Za-z0-9]).{8,}$/"
-            ],
-        ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+    public function login(LoginRequest $request)
+    {
+        $success = $this->accountService->login([
+            'email'    => $request->loginEmail,
+            'password' => $request->loginPassword,
+        ], $request);
 
-        $email = $request->input('loginEmail');
-        $password = $request->input('loginPassword');
-
-        if (Auth::attempt(['email' => $email, 'password' => $password]) && Auth::user()->Status == 1) {
-            // Tạo lại session để tránh session fixation
-            $request->session()->regenerate();
-            session()->put('payment_method', 'cod');
-            session()->forget('coupon');
-
-            // Chuyển hướng đến trang chủ
+        if ($success) {
             return redirect()->route('home');
         }
 
-        return back()->withErrors([
-            'error' => 'Email hoặc mật khẩu không đúng',
-        ])->onlyInput('loginEmail');
+        return back()->withErrors(['error' => 'Invalid email, password or permission denied.'])
+                     ->onlyInput('loginEmail');
     }
-    public function register(Request $request){
-        $validator = Validator::make($request->all(), [
-            'registerName' => 'required|string|max:255',
-            'registerEmail' => 'required|email|unique:users,email',
-            'registerPhone' => 'required|string|unique:users,phone',
-            'registerPassword' => [
-                'required',
-                'string',
-                'min:8',
-                'regex:/[a-z]/',
-                'regex:/[A-Z]/',
-                'regex:/[0-9]/',
-                'regex:/[@$!%*?&]/',
-                'confirmed',
-            ],
-        ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $user = new User();
-        $user->Name = $request->input('registerName');
-        $user->Email = $request->input('registerEmail');
-        $user->Phone = $request->input('registerPhone');
-
-        // Mã hóa mật khẩu bằng cách sử dụng Hash::make
-        $user->password = Hash::make($request->input('registerPassword'));
-
-        $user->Status = 1;
-        $user->save();
-
-        session()->flash('success', 'Đăng ký thành công, vui lòng đăng nhập!');
-        return redirect()->route('login');
+    public function register(RegisterRequest $request)
+    {
+        $this->accountService->register($request->validated());
+        return redirect()->route('login')
+            ->with('success', 'Register successfully!');
     }
 
     public function logout(Request $request)
     {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/')->with('success', 'Bạn đã đăng xuất thành công!');
+        $this->accountService->logout($request);
+        return redirect('/')->with('success', 'Logout successfully!');
     }
 
-    public function changePasswordForm(){
+    public function changePasswordForm()
+    {
         return view('content.authentication.changepassword');
     }
 
-    public function changePassword(Request $request){
-        $validator = Validator::make($request->all(), [
-            'old_password' => 'required',
-            'new_password' => [
-                'required',
-                'string',
-                'min:8',
-                'regex:/[a-z]/',
-                'regex:/[A-Z]/',
-                'regex:/[0-9]/',
-                'regex:/[@$!%*?&]/',
-                'confirmed',
-            ],
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-        /** @var \App\Models\User $user */
+    public function changePassword(ChangePasswordRequest $request)
+    {
         $user = Auth::user();
 
-        if (!Hash::check($request->input('old_password'), $user->password)) {
-            return redirect()->back()->withErrors(['old_password' => 'Current password is incorrect!'])->withInput();
+        if (!Hash::check($request->old_password, $user->password)) {
+            return back()->withErrors(['old_password' => 'Mật khẩu hiện tại không đúng']);
         }
 
-        $user->password = Hash::make($request->input('new_password'));
-        $user->save();
+        $this->accountService->changePassword($user, $request->new_password);
 
-        return redirect()->route('login')->with('success', 'Password changed successfully!');
+        return redirect()->route('login')
+            ->with('success', 'Đổi mật khẩu thành công!');
     }
 }

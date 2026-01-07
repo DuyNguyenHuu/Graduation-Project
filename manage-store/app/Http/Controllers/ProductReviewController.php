@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProductReviewRequest;
-use App\Services\ProductReviewService;
+use App\Http\Services\ProductReviewService;
 use Illuminate\Http\Request;
 
 class ProductReviewController extends Controller

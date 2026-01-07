@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Services\BCategoryService;
+use App\Http\Services\BCategoryService;
 use App\Http\Requests\StoreBCategoryRequest;
 use App\Http\Requests\UpdateBCategoryRequest;
 

@@ -1,20 +1,7 @@
 @extends('layouts.template')
 @section('content')
-    @if (session('success'))
-        <div id="success-message" class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if ($errors->any())
-        <div id="error-message" class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @include('components.success')
+    @include('components.fail')
     <div style="display:flex;justify-content:center;gap:3em;padding: 5em 0 5em 0">
         <div class="login">
             <h3>Sign in</h3>
@@ -56,21 +43,6 @@
             </form>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            let successMessage = document.getElementById('success-message');
-            if (successMessage) {
-                setTimeout(function () {
-                    successMessage.style.display = 'none';
-                }, 55000);
-            }
-
-            let errorMessage = document.getElementById('error-message');
-            if (errorMessage) {
-                setTimeout(function () {
-                    errorMessage.style.display = 'none';
-                }, 5000);
-            }
-        });
-    </script>
+    @include('components.fail')
+    @include('components.success')
 @endsection
