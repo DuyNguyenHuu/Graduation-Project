@@ -74,5 +74,5 @@
             </div>
         </div>
     </div>
-    @include('layouts.success')
+    @include('components.success')
 @endsection

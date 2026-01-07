@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('utils/slug.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+    <script src="{{ asset('utils/category-filter.js') }}"></script>
+    <script src="{{ asset('utils/tag-input.js') }}"></script>
 </head>
 <body>
     @include('layouts.menuleft')

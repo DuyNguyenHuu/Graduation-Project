@@ -25,17 +25,6 @@
                 <button type="submit">Submit</button>
             </form>
             <script>
-                function generateSlug(str) {
-                    return str
-                        .toLowerCase()
-                        .normalize('NFD')                         // tách dấu tiếng Việt
-                        .replace(/[\u0300-\u036f]/g, '')          // xóa dấu
-                        .replace(/[^a-z0-9\s-]/g, '')             // bỏ ký tự đặc biệt
-                        .trim()
-                        .replace(/\s+/g, '-')                     // thay khoảng trắng bằng dấu gạch ngang
-                        .replace(/-+/g, '-');                     // gộp nhiều dấu - liền nhau
-                }
-            
                 document.getElementById('NameBCategory').addEventListener('input', function() {
                     const slug = generateSlug(this.value);
                     document.getElementById('BCategorySlug').value = slug;
@@ -43,5 +32,5 @@
             </script>
         </div>
     </div>
-    @include('layouts.success')
+    @include('components.success')
 @endsection
