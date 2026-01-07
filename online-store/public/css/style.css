@@ -242,15 +242,20 @@
         border-radius: 10px;
     }
 .product-list {
-    display: inline-flex;
+    display: flex;
     gap: 20px;
-    transition: transform 0.3s ease; /* Mượt khi cuộn */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+.product-list::-webkit-scrollbar {
+    display: none;
 }
 .product-item {
     border: 1px solid #ccc;
     padding: 10px;
     width: 180px;
-    flex-shrink: 0; /* Đảm bảo sản phẩm không bị co lại */
+    flex-shrink: 0;
     }
 
 .arrow {
@@ -271,7 +276,7 @@
 .arrow-right {
     right: 10px;
 }
-.arrow.disabled {
+.arrow:disabled {
     background-color: rgba(0, 0, 0, 0.2); /* Làm mờ khi không thể cuộn */
     cursor: not-allowed;
 }

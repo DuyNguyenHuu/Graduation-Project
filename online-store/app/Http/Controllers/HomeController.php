@@ -43,7 +43,7 @@ class HomeController extends Controller
                                 'products.ImageURL'
                             )
                             ->orderByDesc('total_sold')
-                            ->limit(10)
+                            ->limit(15)
                             ->get();
         
         $userRecommendations = [];

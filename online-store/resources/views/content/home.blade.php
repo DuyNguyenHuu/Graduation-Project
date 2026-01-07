@@ -41,7 +41,7 @@
             <div class="product-container">
                 <button class="arrow arrow-left" onclick="scrollProducts(this, -1)" disabled>&#8592;</button>
                 <div class="product-list">
-                    @forelse ($getProduct as $row)
+                    @forelse ($getFrequentProduct as $row)
                         <div class="product-item">
                             @include('components.product_box', ['product' => $row])
                         </div>
@@ -89,26 +89,20 @@
             const productList = container.querySelector('.product-list');
             const leftArrow = container.querySelector('.arrow-left');
             const rightArrow = container.querySelector('.arrow-right');
-            
-            const productItem = productList.querySelector('.product-item');
-            if (!productItem) return;
 
-            const productWidth = productItem.offsetWidth + 20;
+            const scrollAmount = productList.clientWidth * 0.8;
 
-            let currentTransform = productList.dataset.transform
-                ? parseInt(productList.dataset.transform)
-                : 0;
+            productList.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
 
-            const maxScrollWidth = productList.scrollWidth - productList.clientWidth;
-
-            currentTransform += direction * productWidth;
-            currentTransform = Math.max(0, Math.min(currentTransform, maxScrollWidth));
-
-            productList.style.transform = `translateX(-${currentTransform}px)`;
-            productList.dataset.transform = currentTransform;
-
-            leftArrow.disabled = currentTransform === 0;
-            rightArrow.disabled = currentTransform === maxScrollWidth;
+            setTimeout(() => {
+                leftArrow.disabled = productList.scrollLeft <= 0;
+                rightArrow.disabled =
+                    productList.scrollLeft + productList.clientWidth >= productList.scrollWidth - 1;
+            }, 300);
         }
     </script>
+
 @endsection
