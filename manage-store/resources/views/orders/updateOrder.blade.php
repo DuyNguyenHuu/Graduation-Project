@@ -5,19 +5,24 @@
             <div class="title">
                 <p>Order Detail</p>
             </div>
-            <div class="" style="background-color: white">
-                <form method="POST" action="/orders/{{ $orderId->id }}">
-                    @csrf
-                    @method('PUT')
-                    <label>Status</label><br>
-                    <select name="status">
-                        <option value="1" {{ $orderId->status == 1 ? 'selected' : '' }}>Pending</option>
-                        <option value="2" {{ $orderId->status == 2 ? 'selected' : '' }}>Processing</option>
-                        <option value="3" {{ $orderId->status == 3 ? 'selected' : '' }}>Shipped</option>
-                        <option value="0" {{ $orderId->status == 0 ? 'selected' : '' }}>Delivered</option>
-                    </select>
-                    <button type="submit">Update</button>
-                </form>
+            <div>
+                <div class="" style="background-color: white">
+                    <form method="POST" action="/orders/{{ $orderId->id }}">
+                        @csrf
+                        @method('PUT')
+                        <label>Status</label><br>
+                        <select name="status">
+                            <option value="1" {{ $orderId->status == 1 ? 'selected' : '' }}>Pending</option>
+                            <option value="2" {{ $orderId->status == 2 ? 'selected' : '' }}>Processing</option>
+                            <option value="3" {{ $orderId->status == 3 ? 'selected' : '' }}>Shipped</option>
+                            <option value="0" {{ $orderId->status == 0 ? 'selected' : '' }}>Delivered</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </div>
+                <div class="action">
+                    <a href="{{ url('orders') }}" role="button" style="text-decoration: none">Back</a>
+                </div>
             </div>
         </div>
         <div class="Table">

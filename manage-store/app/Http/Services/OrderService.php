@@ -23,6 +23,10 @@ class OrderService
             });
         }
 
+        if ($request->filled('method')) {
+            $query->where('orders.method', $request->method);
+        }
+
         if ($request->filled('status')) {
             $query->where('orders.status', $request->status);
         }

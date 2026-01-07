@@ -25,6 +25,14 @@
                         value="{{ request('date') }}">
                     </div>
                     <div>
+                        <label>Payment Method</label><br>
+                        <select name="method">
+                            <option value="">All Method</option>
+                            <option value="cod" {{ request('method') === "cod" ? 'selected' : '' }}>COD</option>
+                            <option value="vnpay" {{ request('method') === "vnpay" ? 'selected' : '' }}>VNPAY</option>
+                        </select>
+                    </div>
+                    <div>
                         <label>Status</label><br>
                         <select name="status">
                             <option value="">All Status</option>
@@ -48,7 +56,7 @@
                     <th>Province</th>
                     <th>Ward</th>
                     <th>Address</th>
-                    <th>Note</th>
+                    <th>Payment Method</th>
                     <th>Total</th>
                     <th>Date</th>
                     <th>Status</th>
@@ -62,7 +70,7 @@
                     <td>{{ $row->province }}</td>
                     <td>{{ $row->ward }}</td>
                     <td>{{ $row->address }}</td>
-                    <td>{{ $row->note }}</td>
+                    <td>{{ $row->method }}</td>
                     <td>{{ $row->total }}$</td>
                     <td>{{ $row->created_at }}</td>
                     @if ($row->status == 1)
