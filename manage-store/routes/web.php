@@ -24,6 +24,10 @@ use App\Http\Controllers\OrderController;
 */
 
     // Authentication Routes...
+    Route::fallback(function () {
+        return redirect('/')
+            ->withErrors(['msg' => 'The page you are looking for does not exist.']);
+    });
     Route::get('/login', [UserController::class, 'loginPage'])->name('login');
     Route::post('/login', [UserController::class, 'login'])->name('loginProcess');
 
