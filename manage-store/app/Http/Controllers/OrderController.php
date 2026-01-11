@@ -31,6 +31,15 @@ class OrderController extends Controller
 
     public function update(UpdateOrderRequest $request, $idOrder)
     {
+        $getOrderById = $this->orderService->getOrderInfo($idOrder);
+        if($request->status < $getOrderById->status){
+            return redirect()
+                    ->back()
+                    ->withErrors([
+                        'status' => 'Cannot downgrade order status.'
+                    ])
+                    ->withInput();
+        }
         $this->orderService->updateStatus($idOrder, $request->status);
 
         return redirect()

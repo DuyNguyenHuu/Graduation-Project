@@ -15,7 +15,7 @@
                             <option value="1" {{ $orderId->status == 1 ? 'selected' : '' }}>Pending</option>
                             <option value="2" {{ $orderId->status == 2 ? 'selected' : '' }}>Processing</option>
                             <option value="3" {{ $orderId->status == 3 ? 'selected' : '' }}>Shipped</option>
-                            <option value="0" {{ $orderId->status == 0 ? 'selected' : '' }}>Delivered</option>
+                            <option value="4" {{ $orderId->status == 4 ? 'selected' : '' }}>Delivered</option>
                         </select>
                         <button type="submit">Update</button>
                     </form>
@@ -32,6 +32,8 @@
                     <th>Name Product</th>
                     <th>Quantity</th>
                     <th>Price</th>
+                    <th>Size</th>
+                    <th>Type</th>
                 </tr>
                 @foreach ($getOrderById as $row)
                 <tr>
@@ -39,6 +41,8 @@
                     <td>{{ $row->product_name }}</td>
                     <td>{{ $row->quantity }}</td>
                     <td>{{ $row->price }}</td>
+                    <td>{{ $row->size }}</td>
+                    <td>{{ $row->type }}</td>
                 </tr>
                 @endforeach
             </table>

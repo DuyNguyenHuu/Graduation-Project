@@ -26,6 +26,10 @@ use App\Http\Controllers\ResultController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::fallback(function () {
+    return redirect('/')
+        ->withErrors(['msg' => 'The page you are looking for does not exist.']);
+});
 
 Route::get('/login', [AccountsController::class,'index']);
 Route::post('/login', [AccountsController::class, 'login'])->name('login');
@@ -72,3 +76,4 @@ Route::get('/result', [ResultController::class, 'result'])->middleware('auth')->
 
 Route::get('/orders', [OrdersController::class, 'index'])->middleware('auth');
 Route::get('/orders/{idOrder}', [OrdersController::class, 'detailOrder'])->middleware('auth');
+Route::delete('orders/cancel/{idOrder}', [OrdersController::class, 'cancelOrder'])->middleware('auth')->name('orders.cancel');

@@ -20,7 +20,11 @@
                         <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}">
                         <p>{{ $item['name'] }}</p>
                     </a>
-                    <span>{{ $item['quantity'] }} x {{ $item['price'] }}$</span>
+                    <div style="display: inline-flex; justify-content: space-around; width:80%">
+                        <div style="width:30%">Price: {{ $item['quantity'] }} x {{ $item['price'] }}$</div>
+                        <div style="width:20%">Size: {{ $item['size'] }}</div>
+                        <div style="width:20%">Type: {{ $item['type'] }}</div>
+                    </div>
                 @endforeach
             </div>
             <div class="invoice_total">

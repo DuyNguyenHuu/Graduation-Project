@@ -3,7 +3,7 @@
     <div class="background">
         <div class="Add">
             <div class="title">
-                <p>Category</p>
+                <p>Attribute</p>
             </div>
             <div style="display: flex">
                 <div><a href="/productList/{{$productList}}/attributes/create" style="text-decoration: none">Add</a></div>

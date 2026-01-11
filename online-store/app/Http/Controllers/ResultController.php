@@ -33,6 +33,8 @@ class ResultController extends Controller
             $orderDetail->product_id = $item['id'];
             $orderDetail->quantity = $item['quantity'];
             $orderDetail->price = $item['price'];
+            $orderDetail->size = $item['size'];
+            $orderDetail->type = $item['type'];
             $orderDetail->save();
         }
         session()->forget('cart');

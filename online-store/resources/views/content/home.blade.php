@@ -104,5 +104,6 @@
             }, 300);
         }
     </script>
-
+    @include('components.fail')
+    @include('components.success')
 @endsection

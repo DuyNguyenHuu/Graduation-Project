@@ -44,4 +44,16 @@ class OrdersController extends Controller
                         ->get();
         return view('content.orderdetails', compact('detailOrder'));
     }
+
+    public function cancelOrder($idOrder){
+        $order = DB::table('orders')->where('id', $idOrder)->where('user_id', Auth::user()->IdUser)->first();
+        if (!$order || $order->method === 'vnpay') {
+            return redirect()->back()->withErrors(['msg' => 'Order not found or cannot be cancelled.']);
+        }
+        if ($order->status != 1) {
+            return redirect()->back()->withErrors(['msg' => 'Only pending orders can be cancelled.']);
+        }
+        DB::table('orders')->where('id', $idOrder)->delete();
+        return redirect()->back()->with('success', 'Order cancelled successfully.');
+    }
 }

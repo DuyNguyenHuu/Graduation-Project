@@ -11,11 +11,17 @@
                     <div style="width:600px">
                         <p><strong>Name Product:</strong> {{ $row->product_name }}</p>
                     </div>
-                    <div style="width:400px">
+                    <div style="width:300px">
                         <p><strong>Quantity:</strong> {{ $row->quantity }}</p>
                     </div>
                     <div style="width:200px">
                         <p><strong>Price:</strong> {{ $row->price }}$</p>
+                    </div>
+                    <div style="width:100px">
+                        <p><strong>Size:</strong> {{ $row->size }}</p>
+                    </div>
+                    <div style="width:100px">
+                        <p><strong>Type:</strong> {{ $row->type }}</p>
                     </div>
                 </div>
             @endforeach

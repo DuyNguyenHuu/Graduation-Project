@@ -15,7 +15,7 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'nameProduct' => 'required|string|max:255',
-            'idProduct' => 'required|string|max:255',
+            'idProduct' => 'required|string|max:255|unique:products,IdProduct',
             'typeProduct' => 'nullable',
             'imageURLProduct' => 'nullable',
             'statusProduct' => 'required',
@@ -36,6 +36,7 @@ class StoreProductRequest extends FormRequest
             'idProduct.required' => 'Please enter product ID.',
             'idProduct.string' => 'Product ID must be a string.',
             'idProduct.max' => 'Product ID must not exceed 255 characters.',
+            'idProduct.unique' => 'Product ID already exists.',
             'statusProduct.required' => 'Please select product status.',
             'descriptionProduct.string' => 'Description must be a string.',
             'newPriceProduct.required' => 'Please enter new price.',

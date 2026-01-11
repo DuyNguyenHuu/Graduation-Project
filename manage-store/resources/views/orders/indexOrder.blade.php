@@ -39,7 +39,7 @@
                             <option value="1" {{ request('status') === "1" ? 'selected' : '' }}>Pending</option>
                             <option value="2" {{ request('status') === "2" ? 'selected' : '' }}>Processing</option>
                             <option value="3" {{ request('status') === "3" ? 'selected' : '' }}>Shipped</option>
-                            <option value="0" {{ request('status') === "0" ? 'selected' : '' }}>Delivered</option>
+                            <option value="4" {{ request('status') === "4" ? 'selected' : '' }}>Delivered</option>
                         </select>
                     </div>
                     <button type="submit">Filter</button>
@@ -79,7 +79,7 @@
                         <td style="color:#007BFF">Processing</td>
                     @elseif ($row->status == 3)
                         <td style="color:#6F42C1">Shipped</td>
-                    @elseif ($row->status == 0)
+                    @elseif ($row->status == 4)
                         <td style="color:#28A745">Delivered</td>
                     @endif
                     <td>

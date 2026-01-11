@@ -42,34 +42,45 @@
         </div>
         <div class="orderList">
             @foreach($getOrders as $row)
-                <div onclick="window.location='/orders/{{ $row->id }}'" style="display: flex; justify-content: space-around;">
-                    <div>
-                        <p><strong>Order ID:</strong> {{ $row->id }}</p>
-                        <p><strong>Name:</strong> {{ $row->name }}</p>
-                        <p><strong>Date:</strong> {{ $row->created_at }}</p>
-                        @if ($row->status==1)
-                            <p><strong>Status:</strong> <span style="color:#F4A100">Pending</span></p>
-                        @elseif ($row->status==2)
-                            <p><strong>Status:</strong> <span style="color:#007BFF">Processing</span></p>
-                        @elseif ($row->status==3)
-                            <p><strong>Status:</strong> <span style="color:#6F42C1">Shipped</span></p>
-                        @elseif ($row->status==0)
-                            <p><strong>Status:</strong> <span style="color:#28A745">Delivered</span></p>
-                        @endif
-                        @if ($row->method ==='cod')
-                            <p><strong>Payment Method:</strong> Cash on Delivery</p>
-                        @else
-                            <p><strong>Payment Method:</strong> Paid Online</p>
-                        @endif
-                        <p><strong>Total Amount:</strong> ${{ number_format($row->total, 2) }}</p>
+                <div>
+                    <div onclick="window.location='/orders/{{ $row->id }}'" style="display: flex; justify-content: space-around;">
+                        <div>
+                            <p><strong>Order ID:</strong> {{ $row->id }}</p>
+                            <p><strong>Name:</strong> {{ $row->name }}</p>
+                            <p><strong>Date:</strong> {{ $row->created_at }}</p>
+                            @if ($row->status==1)
+                                <p><strong>Status:</strong> <span style="color:#F4A100">Pending</span></p>
+                            @elseif ($row->status==2)
+                                <p><strong>Status:</strong> <span style="color:#007BFF">Processing</span></p>
+                            @elseif ($row->status==3)
+                                <p><strong>Status:</strong> <span style="color:#6F42C1">Shipped</span></p>
+                            @elseif ($row->status==4)
+                                <p><strong>Status:</strong> <span style="color:#28A745">Delivered</span></p>
+                            @endif
+                            @if ($row->method ==='cod')
+                                <p><strong>Payment Method:</strong> Cash on Delivery</p>
+                            @else
+                                <p><strong>Payment Method:</strong> Paid Online</p>
+                            @endif
+                            <p><strong>Total Amount:</strong> ${{ number_format($row->total, 2) }}</p>
+                        </div>
+                        <div>
+                            <p><strong>Consignee:</strong> {{ $row->consignee }}</p>
+                            <p><strong>Province:</strong> {{ $row->province }}</p>
+                            <p><strong>Ward:</strong> {{ $row->ward }}</p>
+                            <p><strong>Address:</strong> {{ $row->address }}</p>
+                            <p><strong>Note:</strong> {{ $row->note }}</p>
+                        </div>
                     </div>
-                    <div>
-                        <p><strong>Consignee:</strong> {{ $row->consignee }}</p>
-                        <p><strong>Province:</strong> {{ $row->province }}</p>
-                        <p><strong>Ward:</strong> {{ $row->ward }}</p>
-                        <p><strong>Address:</strong> {{ $row->address }}</p>
-                        <p><strong>Note:</strong> {{ $row->note }}</p>
-                    </div>
+                    @if ($row->status==1 && $row->method==='cod')
+                        <form action="{{ route('orders.cancel', $row->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to cancel this order?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" style="background-color: red; color: white; border: none; padding: 10px 20px; cursor: pointer; margin-top: 10px;">
+                                Cancel Order
+                            </button>
+                        </form>
+                    @endif
                 </div>
             @endforeach
         </div>
@@ -79,4 +90,6 @@
                 </div>
             </div>
     </div>
+    @include('components.fail')
+    @include('components.success')
 @endsection
