@@ -14,6 +14,8 @@
     <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
     <script src="{{ asset('utils/category-filter.js') }}"></script>
     <script src="{{ asset('utils/tag-input.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ asset('utils/revenueChart.js') }}"></script>
 </head>
 <body>
     @include('layouts.menuleft')
