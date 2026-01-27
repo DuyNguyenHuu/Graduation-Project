@@ -23,7 +23,7 @@ class AccountService
     {
         return User::create([
             'Name'     => $data['registerName'],
-            'Email'    => $data['registerEmail'],
+            'email'    => $data['registerEmail'],
             'Phone'    => $data['registerPhone'],
             'password' => Hash::make($data['registerPassword']),
             'Status'   => 1,

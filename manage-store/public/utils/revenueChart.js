@@ -23,6 +23,15 @@ function renderRevenueChart(canvasId, labels, revenues) {
         },
         options: {
             responsive: true,
+            onClick: (evt, elements) => {
+                if (elements.length > 0) {
+                    const index = elements[0].index;
+                    const date = labels[index];
+
+                    // Redirect tới trang orders theo ngày
+                    window.location.href = `/orders?search=&date=${date}&method=&status=`;
+                }
+            },
             plugins: {
                 tooltip: {
                     callbacks: {

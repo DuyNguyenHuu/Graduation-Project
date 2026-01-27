@@ -86,9 +86,22 @@ class DashBoardController extends Controller
             ];
         });
 
+        $countUsers = DB::table('users')->count();
+        $countProducts = DB::table('products')->count();
+        $countUsersToday = DB::table('users')
+            ->whereDate('created_at', Carbon::today())
+            ->count();
+        $countUsersYesterday = DB::table('users')
+            ->whereDate('created_at', Carbon::yesterday())
+            ->count();
+        $percentChangeUsers = 0;
+        if ($countUsersYesterday > 0) {
+            $percentChangeUsers = (($countUsersToday - $countUsersYesterday) / $countUsersYesterday) * 100;
+        }
+
         return view('dashBoard', compact('countPendingOrders', 'countProcessingOrders', 'countShippedOrders', 'countDeliveredOrders',
                                                                 'currentRevenue', 'percentChange','currentRevenueMonth', 'percentChangeMonth',
                                                                 'countOrderToday', 'percentChangeOrders',
-                                                                'finalData'));
+                                                                'finalData', 'countUsers', 'countProducts', 'countUsersToday','percentChangeUsers'));
     }
 }

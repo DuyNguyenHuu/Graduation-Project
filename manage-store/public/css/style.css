@@ -45,41 +45,63 @@
 .container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 10px;
-    height: 699px; /* chiếm toàn màn hình */
+    gap: 15px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
 }
 
 .box {
     background: whitesmoke;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    padding: 20px
+    font-size: 18px;
+    padding: 15px;
+    border-radius: 10px;
 }
+
 .box h3 {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
+
+/* Stat container */
 .stats{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
 }
+
+/* Stat box */
 .stat {
     text-align: center;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
+    background: white;
+    transition: 0.2s;
+}
+
+.stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .box button {
-    margin-top: 10px;
-    padding: 8px 12px;
+    margin-top: 12px;
+    padding: 8px 14px;
     background-color: #3498DB;
     color: white;
     border: none;
+    border-radius: 6px;
 }
 .Add{
     display:flex;
@@ -106,21 +128,92 @@
 }
 .Table{
     width: 100%;
-    background-color: white;
-    border-radius: 10px;
-    padding: 5% 2% 5% 2%
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    overflow-x: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
 
-}
+/* Table */
 .Table table{
-    width:100%
+    width:100%;
+    border-collapse: collapse;
+    font-size: 14px;
 }
+
+/* Header */
 .Table th{
-    border: 1px solid black;
+    background: #3498DB;
+    color: white;
+    padding: 12px 10px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Cell */
+.Table td{
+    padding: 10px;
+    border-bottom: 1px solid #eee;
     text-align: center;
 }
+
+/* Hover row */
+.Table tr:hover td{
+    background: #f8fbff;
+}
+
+/* Border */
+.Table th,
 .Table td{
-    border: 1px solid black;
-    text-align: center;
+    border: none;
+}
+
+/* Action icon */
+.Table i{
+    font-size: 16px;
+}
+
+/* Action buttons layout */
+.Table td div{
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* Edit */
+.Table a{
+    color: #3498DB;
+}
+
+/* Delete */
+.Table button{
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+}
+
+.Table button:hover{
+    transform: scale(1.1);
+}
+
+/* Status badge */
+.status-enabled{
+    color: #2ecc71;
+    font-weight: 600;
+}
+
+.status-disabled{
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px){
+    .Table table{
+        font-size: 13px;
+    }
 }
 .category{
     background-color: whitesmoke;
@@ -182,13 +275,71 @@
 }
 
 .filter{
-    display:flex;
-    justify-content: space-between;
-    background-color: white;
-    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    background: white;
+    border-radius: 12px;
     margin-bottom: 1em;
-    padding: 1em;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
+
+/* Label */
+.filter label{
+    font-weight: 600;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Select + Input */
+.filter select,
+.filter input{
+    width: 100%;
+    padding: 8px 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+/* Focus */
+.filter select:focus,
+.filter input:focus{
+    border-color: #3498DB;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52,152,219,0.15);
+}
+
+/* Button */
+.filter button{
+    align-self: end;
+    height: 38px;
+    border-radius: 6px;
+    border: none;
+    background: #3498DB;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.filter button:hover{
+    background: #217dbb;
+}
+
+/* Mobile */
+@media (max-width: 600px){
+    .filter{
+        grid-template-columns: 1fr;
+    }
+
+    .filter button{
+        width: 100%;
+    }
+}
+
 #toastsuccess{
     position: fixed;
     bottom: 20px;
