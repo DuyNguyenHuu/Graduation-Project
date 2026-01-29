@@ -10,7 +10,7 @@
                 <input type="email" class="account" name="loginEmail" placeholder="Email"><br>
                 <input type="password" class="account" name="loginPassword" placeholder="Password">
                 <div style="display:flex; justify-content: space-around;">
-                    <div><input type="checkbox">Remember Password</div>
+                    <div><input type="checkbox" name="remember" id="remember">Remember Password</div>
                     <div><a href="{{ route('password.request') }}">Forgot Password</a></div>
                 </div>
                 <button type="submit">Sign in</button>

@@ -8,9 +8,13 @@ use Illuminate\Support\Facades\Hash;
 
 class AccountService
 {
-    public function login(array $credentials, $request)
+    public function login(array $credentials, $request, bool $remember = false)
     {
-        if (Auth::attempt($credentials) && Auth::user()->Status == 1) {
+        if (Auth::attempt($credentials, $remember)) {
+            if (Auth::user()->Status != 1){
+                Auth::logout();
+                return false;
+            }
             $request->session()->regenerate();
             session()->put('payment_method', 'cod');
             session()->forget('coupon');

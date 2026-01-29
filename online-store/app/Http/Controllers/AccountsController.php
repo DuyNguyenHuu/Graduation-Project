@@ -29,7 +29,7 @@ class AccountsController extends Controller
         $success = $this->accountService->login([
             'email'    => $request->loginEmail,
             'password' => $request->loginPassword,
-        ], $request);
+        ], $request, $request->boolean('remember'));
 
         if ($success) {
             return redirect()->route('home');
