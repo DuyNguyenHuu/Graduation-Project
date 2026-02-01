@@ -7,6 +7,21 @@
             <!-- Hiển thị danh mục-->
             <form method="GET" action="{{ route('products') }}">
                 <button type="submit">Filter</button>
+                <div class="priceFilter">
+                    <label style="font-size:18px; font-weight:500">Price</label>
+
+                    <div>
+                        <input type="number" name="min_price" 
+                            value="{{ request('min_price') }}"
+                            placeholder="Min price">
+                    </div>
+
+                    <div>
+                        <input type="number" name="max_price" 
+                            value="{{ request('max_price') }}"
+                            placeholder="Max price">
+                    </div>
+                </div>
                 @foreach ($getCategory as $category)
                     <div>
                         <label style="font-size: 18px; font-weight:500">{{ $category->NameCategory }}</label><br>

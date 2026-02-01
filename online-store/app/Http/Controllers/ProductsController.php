@@ -20,16 +20,26 @@ class ProductsController extends Controller
                     ->select('*')
                     ->get();
         $filters = $request->input('filter',[]);
+        $minPrice = $request->input('min_price', null);
+        $maxPrice = $request->input('max_price', null);
         if(!empty($filters)){
             $getFilterProduct=DB::table('products')->where('StatusProduct', '=', 'Publish')
-                                ->select('*')->whereRaw('1=0');
+                                ->select('*')
+                                ->whereRaw('1=0');
             foreach($filters as $filter){
                 $filterParts=explode(',', $filter);
                 $IdCategory=$filterParts[0];
                 $IdSubCategory=isset($filterParts[1])?$filterParts[1]:null;
                 if($IdSubCategory==null){
                     $allFilterProduct=DB::table('products')->where('StatusProduct', '=', 'Publish')
-                                        ->where('category', '=', $IdCategory)->select('*');
+                                        ->where('category', '=', $IdCategory)
+                                        ->when($minPrice, function ($q) use ($minPrice) {
+                                            $q->where('NewPrice', '>=', $minPrice);
+                                        })
+                                        ->when($maxPrice, function ($q) use ($maxPrice) {
+                                            $q->where('NewPrice', '<=', $maxPrice);
+                                        })
+                                        ->select('*');
                     $getFilterProduct=$getFilterProduct->union($allFilterProduct);
                 }
                 else{
@@ -42,6 +52,12 @@ class ProductsController extends Controller
         }
         else{
             $getProduct=DB::table('products')->where('StatusProduct', '=', 'Publish')->orderBy('created_at', 'desc')
+                            ->when($minPrice, function ($q) use ($minPrice) {
+                                $q->where('NewPrice', '>=', $minPrice);
+                            })
+                            ->when($maxPrice, function ($q) use ($maxPrice) {
+                                $q->where('NewPrice', '<=', $maxPrice);
+                            })
                             ->select('*')->paginate(10)->appends($request->all());
         }
         return view('content.products',compact('getCategory','getProduct', 'getSubCategory'));
@@ -112,6 +128,7 @@ class ProductsController extends Controller
             'Evaluate' => $request->input('evaluate'),
             'Comments' => $request->input('comment'),
             'created_at' => now(),
+            'updated_at' => now(),
             'status' => 1
         ]);
 
