@@ -15,6 +15,7 @@ use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\VNPayController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,3 +78,5 @@ Route::get('/result', [ResultController::class, 'result'])->middleware('auth')->
 Route::get('/orders', [OrdersController::class, 'index'])->middleware('auth');
 Route::get('/orders/{idOrder}', [OrdersController::class, 'detailOrder'])->middleware('auth');
 Route::delete('orders/cancel/{idOrder}', [OrdersController::class, 'cancelOrder'])->middleware('auth')->name('orders.cancel');
+Route::get('/chat', [ChatController::class, 'index'])->middleware('auth')->name('chat');
+Route::post('/chat/ask', [ChatController::class,'askAI'])->middleware('auth');
