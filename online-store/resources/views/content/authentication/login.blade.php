@@ -13,6 +13,7 @@
                     <div><input type="checkbox" name="remember" id="remember">Remember Password</div>
                     <div><a href="{{ route('password.request') }}">Forgot Password</a></div>
                 </div>
+                <a href="/auth/google" class="btn btn-danger">Login with Google</a>
                 <button type="submit">Sign in</button>
             </form>
         </div>

@@ -16,7 +16,9 @@ use App\Http\Controllers\VNPayController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ChatController;
-
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -80,3 +82,27 @@ Route::get('/orders/{idOrder}', [OrdersController::class, 'detailOrder'])->middl
 Route::delete('orders/cancel/{idOrder}', [OrdersController::class, 'cancelOrder'])->middleware('auth')->name('orders.cancel');
 Route::get('/chat', [ChatController::class, 'index'])->middleware('auth')->name('chat');
 Route::post('/chat/ask', [ChatController::class,'askAI'])->middleware('auth');
+Route::get('/cache-test', function () {
+    try {
+        Cache::put('test_key', 'Hello Memcached', 60);
+        return Cache::get('test_key');
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
+});
+
+Route::get('/search', function(Request $request){
+    $keyword = $request->keyword;
+    return DB::table('products')
+                ->where('NameProduct', 'like', "%$keyword%")
+                ->select('*')
+                ->get();
+});
+Route::get('/product/{id}', function($id){
+    return DB::table('products')->where('IdProduct', $id)->first();
+});
+
+Route::post('/upload-images', [ContactsController::class, 'upload']);
+
+Route::get('/auth/{provider}', [AccountsController::class, 'redirect']);
+Route::get('/auth/{provider}/callback', [AccountsController::class, 'callback']);

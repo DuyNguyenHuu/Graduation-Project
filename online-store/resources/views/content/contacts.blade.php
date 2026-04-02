@@ -34,5 +34,17 @@
             </div>
         </div>
     </div>
+    <textarea id="editor" name="tinymce" placeholder="Message"></textarea><br>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            tinymce.init({
+                selector: '#editor',
+                height: 300,
+                license_key: 'gpl',
+                plugins: 'link image table code lists productlink multiimage',
+                toolbar: 'undo redo | bold italic | productlink | alignleft aligncenter alignright | bullist numlist | code | multiimage',
+            });
+        });
+    </script>
     @include('components.success')
 @endsection

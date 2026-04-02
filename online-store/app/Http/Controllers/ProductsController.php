@@ -5,20 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 
 use function Laravel\Prompts\select;
 
 class ProductsController extends Controller
 {
     public function index(Request $request){
-        $getCategory=DB::table('categories')
-                    ->where('Status', '=', '1')
-                    ->select('*')
-                    ->get();
-        $getSubCategory=DB::table('subcategories')
+        $getCategory=Cache::get('categories_all');
+
+        $getSubCategory=Cache::remember('subcategories_all', 3600, function(){
+            return DB::table('subcategories')
                     ->where('StatusSub', '=', '1')
                     ->select('*')
                     ->get();
+        });
+
         $filters = $request->input('filter',[]);
         $minPrice = $request->input('min_price', null);
         $maxPrice = $request->input('max_price', null);
@@ -85,15 +87,24 @@ class ProductsController extends Controller
         $getCategory=DB::table('categories')
                     ->select('*')
                     ->get();
-        $DetailProduct=DB::table('products')->where('IdProduct', $IdProduct)
-                        ->first();
-        $optionProduct=DB::table('options')->where('IdProduct_Option', $IdProduct)
+        $DetailProduct=Cache::remember('product_detail_'.$IdProduct, 3600, function() use ($IdProduct){
+            return DB::table('products')
+                    ->where('IdProduct', $IdProduct)
+                    ->first();
+        });
+
+        $optionProduct=Cache::remember('options_product_'.$IdProduct, 3600, function() use ($IdProduct){
+            return DB::table('options')->where('IdProduct_Option', $IdProduct)
                         ->get();
-        $reviewProduct=DB::table('reviews')->where('IdProduct_Review', $IdProduct)
+        });
+
+        $reviewProduct=Cache::remember('reviews_product_'.$IdProduct, 3600, function() use ($IdProduct){
+            return DB::table('reviews')->where('IdProduct_Review', $IdProduct)
                         ->where('reviews.Status', '=', 1)
                         ->join('users', 'reviews.IdUser', '=', 'users.IdUser')
                         ->orderBy('reviews.created_at', 'desc')
                         ->get(['reviews.*', 'users.Name']);
+        });
         $avgRating=round($reviewProduct->avg('Evaluate'), 1);
         $starCount = [
             5 => $reviewProduct->where('Evaluate', 5)->count(),
@@ -102,7 +113,9 @@ class ProductsController extends Controller
             2 => $reviewProduct->where('Evaluate', 2)->count(),
             1 => $reviewProduct->where('Evaluate', 1)->count()
         ];
-        $getShipping = DB::table('generalinfo')->where('id', 1)->first();
+        $getShipping=Cache::remember('shipping_info', 3600, function(){
+            return DB::table('generalinfo')->where('id', 1)->first();
+        });
         $recommendedProducts = [];
         try{
             $response = http::timeout(3)->get(env('RECOMMENDER_API').'/recommend/'.$IdProduct);
